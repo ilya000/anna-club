@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anna Club — fitness that works out</title>
+<meta name="description" content="Anna Club — workouts, fitness tours and a community that shows up. Led by Anna Prasikova.">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- PTminder client login form loader -->
+<script type="text/javascript" src="https://ptminder.com/website/extform/?guid=mKSdqqLlytrXyM8=&st[]=forgot_password&st[]=keep_logged"></script>
+<style>
+  :root{
+    --yellow:#F8CF43;
+    --green:#4A9C2D;
+    --ink:#141414;
+    --white:#ffffff;
+    --paper:#fffdf5;
+    --muted:rgba(20,20,20,.62);
+    --line:rgba(20,20,20,.14);
+    --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Montserrat',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .display{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:lowercase;letter-spacing:0;line-height:.92}
+  .eyebrow{text-transform:uppercase;letter-spacing:0;font-size:.72rem;font-weight:700}
+  a{color:inherit}
+
+  /* ---------- nav ---------- */
+  .bar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;transition:background .3s,box-shadow .3s,border-color .3s;border-bottom:1px solid transparent}
+  .bar.scrolled{background:rgba(255,253,245,.94);backdrop-filter:blur(10px);box-shadow:0 10px 28px rgba(0,0,0,.05);border-color:var(--line)}
+  .bar .brand{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:1.4rem;letter-spacing:0;text-decoration:none;color:var(--ink)}
+  .nav{display:flex;align-items:center;gap:28px}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav a{text-decoration:none;font-weight:600;font-size:.9rem;color:var(--ink);opacity:.8;transition:opacity .2s}
+  .nav a:hover{opacity:1}
+  .nav .nav-cta{background:var(--ink);color:var(--yellow);padding:9px 18px;border-radius:999px;opacity:1;
+    border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:.9rem;white-space:nowrap}
+  .nav .nav-cta:hover,.nav .nav-cta:focus-visible{outline:3px solid rgba(74,156,45,.28)}
+  .burger{display:none;background:none;border:0;cursor:pointer;font-size:1.4rem;color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;background:var(--yellow);overflow:hidden;padding:104px 0 46px;min-height:94vh;display:flex;align-items:center}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--green);transform:scaleX(.34);transform-origin:left center}
+  .hero .wrap{position:relative;z-index:3;width:100%}
+  .hero-grid{display:grid;grid-template-columns:1fr .95fr;gap:28px;align-items:center}
+  .hero .eyebrow{color:var(--ink);margin-bottom:18px}
+  .hero h1{font-size:clamp(4.8rem,14vw,11.8rem);color:var(--white);text-shadow:0 8px 30px rgba(0,0,0,.10)}
+  .hero .tagline{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:0;font-size:clamp(1rem,2.4vw,1.5rem);margin-top:10px;color:var(--ink)}
+  .hero .lede{margin-top:18px;max-width:34ch;font-size:1.08rem;color:var(--ink)}
+  .hero-note{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:800;font-size:.82rem;text-transform:uppercase}
+  .hero-note::before{content:"";width:36px;height:10px;border-radius:999px;background:radial-gradient(circle at 5px 5px,var(--green) 0 5px,transparent 5.5px),radial-gradient(circle at 27px 5px,var(--ink) 0 5px,transparent 5.5px)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;font-weight:700;font-size:.95rem;
+    text-decoration:none;cursor:pointer;border:2px solid var(--ink);transition:transform .15s,background .2s,color .2s;white-space:nowrap}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-solid{background:var(--ink);color:var(--yellow)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--yellow)}
+  .btn-solid:hover,.btn-solid:focus-visible{box-shadow:0 0 0 4px rgba(74,156,45,.24)}
+  .hero-figure{display:flex;justify-content:center;align-items:flex-end}
+  .hero-figure img{width:min(440px,92%);height:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,.18))}
+  .fizz{position:absolute;inset:0;z-index:1;pointer-events:none}
+  .fizz span{position:absolute;bottom:-20px;background:var(--ink);border-radius:50%;opacity:0;animation:rise linear infinite}
+  @keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}12%{opacity:.85}80%{opacity:.5}100%{transform:translateY(-115vh) scale(1);opacity:0}}
+  @media (prefers-reduced-motion:reduce){.fizz span{display:none}}
+
+  /* ---------- generic section ---------- */
+  section{padding:90px 0}
+  .sec-head{max-width:52ch;margin-bottom:46px}
+  .sec-head .eyebrow{color:var(--muted);margin-bottom:14px}
+  .sec-head h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:lowercase;font-size:clamp(2.4rem,6vw,4rem);line-height:1}
+  .sec-head p{margin-top:16px;color:var(--muted);font-size:1.05rem}
+
+  /* poster artifact */
+  .poster-band{background:var(--ink);padding:0;color:var(--white);overflow:hidden}
+  .poster-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:36px;align-items:center;padding:38px 24px}
+  .poster-art{height:270px;border:2px solid var(--yellow);border-radius:8px;overflow:hidden;background:var(--yellow)}
+  .poster-art img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+  .poster-copy .kicker{color:var(--green);font-weight:800;text-transform:uppercase;font-size:.82rem;margin-bottom:14px}
+  .poster-copy h2{font-family:'Anton',sans-serif;font-size:clamp(2.6rem,6vw,5.4rem);font-weight:400;line-height:.9;text-transform:lowercase;color:var(--yellow)}
+  .poster-copy p{margin-top:18px;color:rgba(255,255,255,.74);font-size:1.04rem;max-width:38ch}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:60px;align-items:center}
+  .portrait{position:relative}
+  .portrait::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:2px solid var(--green);border-radius:8px;z-index:-1}
+  .portrait img{width:100%;border-radius:8px;display:block}
+  .portrait .tag{position:absolute;left:-14px;bottom:24px;background:var(--ink);color:var(--yellow);font-weight:700;font-size:.8rem;letter-spacing:.04em;padding:9px 16px;border-radius:999px}
+  .about-grid h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:lowercase;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1;margin-bottom:8px}
+  .about-grid .role{font-weight:700;margin-bottom:18px}
+  .about-grid p.body{color:var(--muted);font-size:1.08rem;margin-bottom:14px}
+  .pull{border-left:8px solid var(--yellow);padding:14px 0 14px 20px;margin:24px 0 0;font-family:'Anton',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:.95;text-transform:lowercase}
+  .micro-stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .micro-stats span{border:2px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:800;font-size:.82rem;background:var(--white)}
+  .micro-stats span:nth-child(2){border-color:var(--green);color:var(--green)}
+
+  /* what we do */
+  .offers{background:var(--yellow)}
+  .offers .sec-head .eyebrow,.offers .sec-head p{color:rgba(20,20,20,.7)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{position:relative;background:var(--paper);border-radius:8px;padding:34px 26px 28px;display:flex;flex-direction:column;gap:13px;border:2px solid var(--ink);transition:transform .18s,box-shadow .18s}
+  .card::before{content:attr(data-no);position:absolute;right:22px;top:16px;font-family:'Anton',sans-serif;font-size:4.2rem;line-height:1;color:rgba(20,20,20,.08)}
+  .card::after{content:"";position:absolute;left:24px;top:22px;width:44px;height:6px;background:var(--green)}
+  .card:hover{transform:translateY(-6px);box-shadow:10px 10px 0 var(--green)}
+  .card .ico{display:none}
+  .card h3{font-size:1.18rem;font-weight:700}
+  .card p{color:var(--muted);font-size:.97rem}
+
+  /* schedule */
+  .schedule-shell{position:relative}
+  .schedule-shell::before{content:"PTminder live";position:absolute;right:18px;top:-18px;background:var(--green);color:var(--yellow);border:2px solid var(--ink);border-radius:999px;padding:7px 14px;font-weight:800;font-size:.78rem;z-index:2}
+  .schedule-frame{border:3px solid var(--ink);border-radius:8px;overflow:hidden;background:var(--yellow);min-height:420px;display:flex;box-shadow:12px 12px 0 rgba(74,156,45,.22)}
+  .schedule-frame iframe{width:100%;min-height:640px;border:0;display:block;background:#fff}
+  .schedule-placeholder{margin:auto;text-align:center;padding:46px 30px;color:rgba(20,20,20,.78);max-width:48ch}
+  .schedule-placeholder b{color:var(--ink)}
+  .schedule-placeholder .btn{margin-top:18px}
+  .signin-wrap{position:relative}
+  .login-pop{position:absolute;top:calc(100% + 12px);right:0;width:330px;max-width:86vw;background:#fff;
+    border:2px solid var(--ink);border-radius:8px;box-shadow:0 20px 54px rgba(0,0,0,.24);padding:22px;z-index:60}
+  .login-pop[hidden]{display:none}
+  .login-pop h3{font-size:1.12rem;font-weight:700;margin-bottom:4px}
+  .login-pop p{font-size:.84rem;color:var(--muted);margin-bottom:14px;line-height:1.45}
+  #ptminder-client-login{text-align:left}
+  #ptminder-client-login input[type="submit"]{background-color:#141414 !important;color:#F8CF43 !important;border:0 !important;border-radius:999px !important;font-weight:700 !important;padding:11px 22px !important;cursor:pointer !important}
+
+  /* events */
+  .events{background:var(--paper)}
+  #events-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+  .event{border:2px solid var(--ink);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;background:var(--white)}
+  .event .thumb{aspect-ratio:16/10;position:relative;background:var(--yellow);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .event .thumb img{width:100%;height:100%;object-fit:cover}
+  .event .body{padding:22px 22px 24px}
+  .event .when{display:inline-block;background:var(--green);color:var(--yellow);font-weight:700;font-size:.74rem;letter-spacing:0;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+  .event h3{font-size:1.25rem;font-weight:700;margin-bottom:8px}
+  .event p{color:var(--muted);font-size:.97rem;margin-bottom:16px}
+  .empty-note{position:relative;border:2px dashed var(--ink);border-radius:8px;padding:42px 34px;text-align:center;color:var(--muted);background:linear-gradient(90deg,rgba(74,156,45,.10),transparent 44%)}
+  .empty-note::before{content:"";position:absolute;left:24px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:22px 0 0 var(--yellow),44px 0 0 var(--ink)}
+  .empty-note b{color:var(--ink)}
+
+  /* timeline */
+  .trips{background:var(--ink);color:var(--white)}
+  .trips .sec-head .eyebrow{color:rgba(255,255,255,.6)}
+  .trips .sec-head h2{color:var(--white)}
+  .trips .sec-head p{color:rgba(255,255,255,.7)}
+  .tl{position:relative;margin-left:8px;padding-left:34px;border-left:2px solid rgba(255,255,255,.18)}
+  .tl-item{position:relative;padding-bottom:46px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-43px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--yellow)}
+  .tl-year{font-family:'Anton',sans-serif;color:var(--yellow);font-size:1.05rem;letter-spacing:0}
+  .tl-item h3{font-size:1.3rem;font-weight:700;margin:2px 0 8px}
+  .tl-item p{color:rgba(255,255,255,.78);max-width:60ch;margin-bottom:14px}
+  .gallery{display:flex;gap:10px;flex-wrap:wrap}
+  .gallery .ph{width:150px;height:104px;border-radius:8px;overflow:hidden;background:var(--yellow);position:relative;flex:0 0 auto;border:1px solid rgba(248,207,67,.4)}
+  .gallery .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .gallery .ph.placeholder{display:flex;align-items:center;justify-content:center}
+  .gallery .ph.placeholder svg{width:64px;height:64px;opacity:.55}
+
+  /* join */
+  .join{background:var(--yellow);text-align:center;position:relative;overflow:hidden}
+  .join::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:var(--green);transform:scaleX(.28);transform-origin:right center}
+  .join h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:lowercase;font-size:clamp(2.4rem,7vw,4.2rem);margin-bottom:10px}
+  .join p{color:rgba(20,20,20,.74);max-width:46ch;margin:0 auto 18px;font-size:1.08rem}
+  .join .members{font-weight:700;margin-bottom:24px}
+  .links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+  /* footer */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:46px 0;font-size:.85rem}
+  .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+  footer .brand{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:1.5rem;color:var(--white)}
+  footer a.lk{color:var(--yellow);text-decoration:none}
+  footer .credits{font-size:.78rem;line-height:1.7;text-align:right;color:rgba(255,255,255,.55)}
+
+  @media(max-width:860px){
+    .nav .nav-links{display:none}
+    .hero{padding:82px 0 42px;min-height:auto}
+    .hero-grid{grid-template-columns:1fr;text-align:center}
+    .hero .lede{margin-left:auto;margin-right:auto}
+    .hero-note{justify-content:center}
+    .cta-row{justify-content:center}
+    .hero-figure{order:-1;margin-bottom:0}
+    .hero-figure img{width:min(292px,86%)}
+    .poster-grid{grid-template-columns:1fr;padding:30px 24px}
+    .poster-art{height:190px}
+    .about-grid{grid-template-columns:1fr;gap:30px}
+    .portrait{max-width:340px;margin:0 auto}
+    .portrait::before{inset:12px -12px -12px 12px}
+    section{padding:62px 0}
+    .sec-head{margin-bottom:32px}
+    .about-grid .role{margin-bottom:14px}
+    .pull{font-size:clamp(1.62rem,9.6vw,2.5rem)}
+    .cards{grid-template-columns:1fr}
+    .schedule-shell::before{right:12px}
+    .foot-grid{flex-direction:column;align-items:flex-start}
+    footer .credits{text-align:left}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="bar" id="bar">
+  <a href="#top" class="brand">anna&nbsp;club</a>
+  <div class="nav">
+    <span class="nav-links">
+      <a href="#about">About</a>
+      <a href="#what">What we do</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#events">Events</a>
+      <a href="#trips">Trips</a>
+    </span>
+    <div class="signin-wrap">
+      <button class="nav-cta" id="signinBtn" aria-expanded="false" aria-controls="loginPop">Sign in</button>
+      <div class="login-pop" id="loginPop" hidden>
+        <h3>Client login</h3>
+        <p>Уже занимаешься с Anna Club? Войди в личный кабинет — расписание, записи и оплаты.</p>
+        <div id="ptminder-client-login"></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="fizz" id="fizz" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">workouts · fitness tours · community</div>
+        <h1 class="display">anna club</h1>
+        <div class="tagline">fitness that works out</div>
+        <p class="lede">Тренировки, фитнес-туры и команда, с которой втягиваешься в спорт всерьёз и надолго.</p>
+        <div class="hero-note">not polished. alive.</div>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#events">Что дальше →</a>
+          <a class="btn btn-ghost" href="#trips">Как это было</a>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <img src="assets/ball.png" alt="Anna Club">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ POSTER / CHARACTER ============ -->
+<section class="poster-band" aria-label="Anna Club character">
+  <div class="wrap poster-grid">
+    <div class="poster-copy">
+      <div class="kicker">the reason it works</div>
+      <h2 class="display">anna in motion</h2>
+      <p>Anna Club держится на личной харизме Ани: смех, техника, дисциплина и ровно столько дерзости, чтобы тренировка не стала скучной обязанностью.</p>
+    </div>
+    <div class="poster-art">
+      <img src="assets/cover.jpg" alt="Anna Club poster">
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="portrait">
+      <img src="assets/anna-portrait.jpg" alt="Anna Prasikova">
+      <span class="tag">Anna Prasikova</span>
+    </div>
+    <div>
+      <div class="eyebrow" style="color:var(--muted);margin-bottom:12px">Meet Anna</div>
+      <h2>the coach</h2>
+      <div class="role">Owner &amp; principal of Anna Club · fitness trainer</div>
+      <p class="body">Анна Прасикова много лет ставит людей на ноги — от зала до сегодняшних онлайн-занятий и выездных туров. Подход один: настоящая техника, привычки, которые остаются, и команда, с которой не бросишь на второй неделе.</p>
+      <p class="body">«Fitness that works out» — это не лозунг, а способ жить: двигаться с удовольствием, путешествовать и держать форму вместе.</p>
+      <div class="pull">strong enough to sweat. funny enough to come back.</div>
+      <div class="micro-stats">
+        <span>since 2014</span>
+        <span>552 members</span>
+        <span>31 reviews</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT WE DO ============ -->
+<section class="offers" id="what">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What we do</div>
+      <h2 class="display">move · travel · belong</h2>
+    </div>
+    <div class="cards">
+      <div class="card" data-no="01">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="11" r="4"/><path d="M24 16v13m0 0l-8 9m8-9l8 9M14 21l10 3 10-3"/></svg>
+        <h3>Online classes</h3>
+        <p>Регулярные онлайн-занятия каждый день: <b>iRun</b>, <b>CA Hot Iron</b>, <b>CA Step Interval</b>, <b>CA ABS / Stretch</b>. Сила, кардио, техника и растяжка — из дома.</p>
+        <a class="btn btn-ghost" href="#schedule" style="align-self:flex-start;margin-top:4px;padding:11px 20px;font-size:.88rem">Book a class →</a>
+      </div>
+      <div class="card" data-no="02">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 38l11-22 8 14 5-8 12 16z"/><circle cx="33" cy="12" r="4"/></svg>
+        <h3>Fitness tours</h3>
+        <p>Выездные туры и ретриты — Тахо, природа, новые места. Тренировки, приключения и отдых в одном путешествии.</p>
+      </div>
+      <div class="card" data-no="03">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="15" r="6"/><circle cx="33" cy="17" r="5"/><path d="M5 40c0-7 5-12 12-12s12 5 12 12"/><path d="M29 40c0-6 3-10 8-10s8 4 8 10"/></svg>
+        <h3>Community</h3>
+        <p>«Физкультурники» — живое сообщество, где поддерживают, подкалывают и приходят снова. Здоровый образ жизни вместе.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCHEDULE (PTminder) ============ -->
+<section id="schedule">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Book a class</div>
+      <h2 class="display">live schedule</h2>
+      <p>Расписание онлайн-классов обновляется автоматически из PTminder — выбирай занятие и записывайся прямо здесь.</p>
+    </div>
+    <div class="schedule-shell">
+      <div class="schedule-frame">
+        <iframe src="https://ptminder.com/frame/get-class-scheduler?webaddr=annaclub" title="Anna Club — class schedule" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section class="events" id="events">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Upcoming</div>
+      <h2 class="display">what’s next</h2>
+      <p>Анонсы ближайших туров, ретритов и сборов. Полные детали и запись — в группе «Физкультурники».</p>
+    </div>
+    <div id="events-list"></div>
+  </div>
+</section>
+
+<!-- ============ TRIPS / TIMELINE ============ -->
+<section class="trips" id="trips">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The story so far</div>
+      <h2 class="display">trips &amp; moments</h2>
+      <p>Годы тренировок, выездов и поездок — от первых сборов до больших фитнес-туров.</p>
+    </div>
+    <div class="tl" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ============ JOIN ============ -->
+<section class="join" id="join">
+  <div class="wrap">
+    <h2 class="display">let’s move together</h2>
+    <p>Вступай в «Физкультурники» — анонсы туров, уроки, поддержка и команда. Или напиши Анне напрямую.</p>
+    <div class="members">552 members · 100% recommend · 31 reviews</div>
+    <div class="links">
+      <a class="btn btn-solid" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Facebook group</a>
+      <a class="btn btn-ghost" href="https://www.facebook.com/AnnaClubLLC" target="_blank" rel="noopener">Facebook page</a>
+      <a class="btn btn-ghost" href="mailto:anna@anna.club">anna@anna.club</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand">anna club</div>
+      <div style="margin-top:8px">Anna Club LLC · <a class="lk" href="https://anna.club">anna.club</a></div>
+      <div style="margin-top:4px">© 2026 Anna Club LLC. All rights reserved.</div>
+    </div>
+    <div class="credits">Photo: Alina Karelina · Design: Irena Itskova</div>
+  </div>
+</footer>
+
+<script>
+  /* =====================================================================
+     КОНТЕНТ САЙТА. Чтобы добавить событие — допиши объект в массив.
+     Поля: when (RU подпись даты), title (RU), text (RU), img (необязательно).
+     Фото клади в assets/ и укажи имя файла в photos: ['assets/file.jpg'].
+     Если photos пуст — покажется фирменный плейсхолдер (точечный шар).
+     ===================================================================== */
+
+  // Ближайшие события (анонсы). Пусто => показываем приглашение в группу.
+  const UPCOMING = [
+    // пример:
+    // { when:'осень 2026', title:'Фитнес-тур (анонс)', text:'Детали и запись — в группе «Физкультурники».', cover:'' },
+  ];
+
+  // Лента прошедшего — сверху новое. Здесь заведены реальные вехи;
+  // фото подставим из группы/архива (пока — плейсхолдеры).
+  const TIMELINE = [
+    { year:'2025', title:'Фитнес-тур на Тахо', text:'Выездной ретрит на Лейк-Тахо: тренировки на природе, озеро, баня и команда. Десятки фото с поездки.', photos:[] },
+    { year:'зож', title:'Серьёзно, но с юмором', text:'У Anna Club дисциплина не отменяет смех. Иногда самый точный совет по питанию звучит так, что его уже невозможно забыть.', photos:['assets/anna-nutrition.jpg'] },
+    { year:'2024', title:'Сборы и выезды', text:'Групповые тренировки на природе и совместные выезды — фитнес как повод собраться и попутешествовать.', photos:[] },
+    { year:'San Francisco', title:'Выезд к Palace of Fine Arts', text:'Большой групповой сбор «Физкультурников» — фирменное фото с поднятыми руками у Дворца изящных искусств.', photos:[] },
+    { year:'регулярно', title:'Занятия в зале и онлайн', text:'Аэробика, сила и техника — еженедельные тренировки, которые держат форму и не дают заскучать.', photos:['assets/anna-nutrition.jpg'] },
+    { year:'2014', title:'С чего всё началось', text:'Первые сборы «Физкультурников». С тех пор — годы тренировок, поездок и пополнения команды.', photos:[] }
+  ];
+
+  const BALL = `<svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g>
+    ${Array.from({length:90},()=>{const x=(Math.random()*100).toFixed(1),y=(Math.random()*100).toFixed(1),r=(1+Math.random()*3).toFixed(1);
+      const dx=x-50,dy=y-50; return (dx*dx+dy*dy<2100)?`<circle cx="${x}" cy="${y}" r="${r}"/>`:'';}).join('')}
+  </g></svg>`;
+
+  function renderEvents(){
+    const el=document.getElementById('events-list');
+    if(!UPCOMING.length){
+      el.innerHTML=`<div class="empty-note" style="grid-column:1/-1">
+        <b>Ближайший тур ещё готовится.</b><br>
+        Анонсы появляются в группе «Физкультурники» — вступай, чтобы не пропустить.
+        <div style="margin-top:18px"><a class="btn btn-solid" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Следить за анонсами</a></div>
+      </div>`;
+      return;
+    }
+    el.innerHTML=UPCOMING.map(e=>`
+      <article class="event">
+        <div class="thumb">${e.cover?`<img src="${e.cover}" alt="">`:BALL}</div>
+        <div class="body">
+          <span class="when">${e.when}</span>
+          <h3>${e.title}</h3>
+          <p>${e.text}</p>
+          <a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Подробнее</a>
+        </div>
+      </article>`).join('');
+  }
+
+  function renderTimeline(){
+    const el=document.getElementById('timeline');
+    el.innerHTML=TIMELINE.map(t=>{
+      const photos=(t.photos&&t.photos.length)
+        ? t.photos.map(p=>`<div class="ph"><img src="${p}" alt=""></div>`).join('')
+        : `<div class="ph placeholder" title="фото скоро">${BALL}</div>`;
+      return `<div class="tl-item">
+        <div class="tl-year">${t.year}</div>
+        <h3>${t.title}</h3>
+        <p>${t.text}</p>
+        <div class="gallery">${photos}</div>
+      </div>`;
+    }).join('');
+  }
+
+  renderEvents();
+  renderTimeline();
+
+  // sticky nav bg
+  const bar=document.getElementById('bar');
+  const onScroll=()=>bar.classList.toggle('scrolled', window.scrollY>40);
+  window.addEventListener('scroll',onScroll); onScroll();
+
+  // sign-in dropdown
+  const sBtn=document.getElementById('signinBtn'), pop=document.getElementById('loginPop');
+  function setPop(open){
+    if(open){pop.removeAttribute('hidden');}else{pop.setAttribute('hidden','');}
+    sBtn.setAttribute('aria-expanded', open?'true':'false');
+  }
+  sBtn.addEventListener('click',e=>{e.stopPropagation();setPop(pop.hasAttribute('hidden'));});
+  document.addEventListener('click',e=>{
+    if(!pop.hasAttribute('hidden') && !pop.contains(e.target) && e.target!==sBtn) setPop(false);
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setPop(false);});
+
+  // fizzing dots
+  const fizz=document.getElementById('fizz');
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    for(let i=0;i<26;i++){
+      const s=document.createElement('span');
+      const size=4+Math.random()*16;
+      s.style.width=s.style.height=size+'px';
+      s.style.left=(Math.random()*100)+'%';
+      s.style.animationDuration=(7+Math.random()*9)+'s';
+      s.style.animationDelay=(-Math.random()*12)+'s';
+      fizz.appendChild(s);
+    }
+  }
+</script>
+</body>
+</html>
