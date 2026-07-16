@@ -180,7 +180,15 @@
   footer .credits{font-size:.78rem;line-height:1.7;text-align:right;color:rgba(255,255,255,.55)}
 
   @media(max-width:860px){
-    .nav .nav-links{display:none}
+    .burger{display:block;order:2;line-height:1}
+    .signin-wrap{order:3}
+    .nav{gap:12px}
+    .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;align-items:stretch;
+      background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 22px 40px rgba(0,0,0,.14);
+      padding:6px 0;display:none}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:13px 24px;font-size:1.02rem;opacity:1;border-bottom:1px solid var(--line)}
+    .nav-links a:last-child{border-bottom:0}
     .hero{padding:76px 0 38px;min-height:auto}
     .hero-grid{grid-template-columns:1fr;text-align:center}
     .hero .lede{margin-left:auto;margin-right:auto}
@@ -209,13 +217,14 @@
 <nav class="bar" id="bar">
   <a href="#top" class="brand">anna&nbsp;club</a>
   <div class="nav">
-    <span class="nav-links">
+    <span class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#what">What we do</a>
       <a href="#schedule">Schedule</a>
-      <a href="#events">Events</a>
       <a href="#trips">Trips</a>
+      <a href="#join">Join</a>
     </span>
+    <button class="burger" id="burger" aria-label="Меню" aria-controls="navLinks" aria-expanded="false">☰</button>
     <div class="signin-wrap">
       <button class="nav-cta" id="signinBtn" aria-expanded="false" aria-controls="loginPop">Sign in</button>
       <div class="login-pop" id="loginPop" hidden>
@@ -236,11 +245,11 @@
         <div class="eyebrow">workouts · fitness tours · community</div>
         <h1 class="display">anna club</h1>
         <div class="tagline">fitness that works out</div>
-        <p class="lede">Тренировки, фитнес-туры и команда, с которой втягиваешься в спорт всерьёз и надолго.</p>
-        <div class="hero-note">not polished. alive.</div>
+        <p class="lede">Онлайн-тренировки, фитнес-туры и команда Анны Прасиковой — заниматься регулярно, с техникой и без скуки.</p>
+        <div class="hero-note">not staged. alive.</div>
         <div class="cta-row">
-          <a class="btn btn-solid" href="#events">Что дальше →</a>
-          <a class="btn btn-ghost" href="#trips">Как это было</a>
+          <a class="btn btn-solid" href="#schedule">Записаться на тренировку</a>
+          <a class="btn btn-ghost" href="#join">В сообщество</a>
         </div>
       </div>
       <div class="hero-figure">
@@ -274,14 +283,14 @@
     <div>
       <div class="eyebrow" style="color:var(--muted);margin-bottom:12px">Meet Anna</div>
       <h2>the coach</h2>
-      <div class="role">Owner &amp; principal of Anna Club · fitness trainer</div>
-      <p class="body">Анна Прасикова много лет ставит людей на ноги — от зала до сегодняшних онлайн-занятий и выездных туров. Подход один: настоящая техника, привычки, которые остаются, и команда, с которой не бросишь на второй неделе.</p>
+      <div class="role">Founder &amp; coach · Anna Club</div>
+      <p class="body">Анна Прасикова много лет помогает людям втянуться в регулярные тренировки — от зала до сегодняшних онлайн-занятий и выездных туров. Подход один: настоящая техника, привычки, которые остаются, и команда, с которой не бросишь на второй неделе.</p>
       <p class="body">«Fitness that works out» — это не лозунг, а способ жить: двигаться с удовольствием, путешествовать и держать форму вместе.</p>
       <div class="pull">strong enough to sweat. funny enough to come back.</div>
       <div class="micro-stats">
-        <span>since 2014</span>
-        <span>552 members</span>
-        <span>31 reviews</span>
+        <span>с 2014 года</span>
+        <span>552 участника</span>
+        <span>31 отзыв</span>
       </div>
     </div>
   </div>
@@ -299,17 +308,19 @@
         <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="11" r="4"/><path d="M24 16v13m0 0l-8 9m8-9l8 9M14 21l10 3 10-3"/></svg>
         <h3>Online classes</h3>
         <p>Регулярные онлайн-занятия каждый день: <b>iRun</b>, <b>CA Hot Iron</b>, <b>CA Step Interval</b>, <b>CA ABS / Stretch</b>. Сила, кардио, техника и растяжка — из дома.</p>
-        <a class="btn btn-ghost" href="#schedule" style="align-self:flex-start;margin-top:4px;padding:11px 20px;font-size:.88rem">Book a class →</a>
+        <a class="btn btn-ghost" href="#schedule" style="align-self:flex-start;margin-top:4px;padding:11px 20px;font-size:.88rem">Открыть расписание →</a>
       </div>
       <div class="card" data-no="02">
         <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 38l11-22 8 14 5-8 12 16z"/><circle cx="33" cy="12" r="4"/></svg>
         <h3>Fitness tours</h3>
         <p>Выездные туры и ретриты — Тахо, природа, новые места. Тренировки, приключения и отдых в одном путешествии.</p>
+        <a class="btn btn-ghost" href="#events" style="align-self:flex-start;margin-top:4px;padding:11px 20px;font-size:.88rem">Следить за турами →</a>
       </div>
       <div class="card" data-no="03">
         <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="15" r="6"/><circle cx="33" cy="17" r="5"/><path d="M5 40c0-7 5-12 12-12s12 5 12 12"/><path d="M29 40c0-6 3-10 8-10s8 4 8 10"/></svg>
         <h3>Community</h3>
-        <p>«Физкультурники» — живое сообщество, где поддерживают, подкалывают и приходят снова. Здоровый образ жизни вместе.</p>
+        <p>«Физкультурники» — живое сообщество, где поддерживают, подкалывают и приходят снова. Здесь проще не пропасть после второй недели.</p>
+        <a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:4px;padding:11px 20px;font-size:.88rem">Вступить в группу →</a>
       </div>
     </div>
   </div>
@@ -321,7 +332,7 @@
     <div class="sec-head">
       <div class="eyebrow">Book a class</div>
       <h2 class="display">live schedule</h2>
-      <p>Расписание онлайн-классов обновляется автоматически из PTminder — выбирай занятие и записывайся прямо здесь.</p>
+      <p>Расписание онлайн-классов обновляется автоматически из PTminder — выбирай занятие и записывайся прямо здесь. Новичкам проще начать с <b>ABS / Stretch</b> или <b>Step Interval</b>; сомневаешься — напиши Анне.</p>
     </div>
     <div class="schedule-shell">
       <div class="schedule-frame">
@@ -349,7 +360,7 @@
     <div class="sec-head">
       <div class="eyebrow">The story so far</div>
       <h2 class="display">trips &amp; moments</h2>
-      <p>Годы тренировок, выездов и поездок — от первых сборов до больших фитнес-туров.</p>
+      <p>Годы тренировок, выездов и поездок — от первых сборов до больших фитнес-туров. Фото из архива добавим позже — пока оставили вехи, чтобы была видна история клуба.</p>
     </div>
     <div class="tl" id="timeline"></div>
   </div>
@@ -359,11 +370,11 @@
 <section class="join" id="join">
   <div class="wrap">
     <h2 class="display">let’s move together</h2>
-    <p>Вступай в «Физкультурники» — анонсы туров, уроки, поддержка и команда. Или напиши Анне напрямую.</p>
-    <div class="members">552 members · 100% recommend · 31 reviews</div>
+    <p>Вступай в «Физкультурники»: там анонсы туров, записи, поддержка и жизнь клуба. По личным вопросам — напиши Анне напрямую.</p>
+    <div class="members">552 участника · 100% рекомендуют · 31 отзыв</div>
     <div class="links">
-      <a class="btn btn-solid" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Facebook group</a>
-      <a class="btn btn-ghost" href="https://www.facebook.com/AnnaClubLLC" target="_blank" rel="noopener">Facebook page</a>
+      <a class="btn btn-solid" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Группа «Физкультурники»</a>
+      <a class="btn btn-ghost" href="https://www.facebook.com/AnnaClubLLC" target="_blank" rel="noopener">Страница Anna Club</a>
       <a class="btn btn-ghost" href="mailto:anna@anna.club">anna@anna.club</a>
     </div>
   </div>
@@ -427,7 +438,7 @@
           <span class="when">${e.when}</span>
           <h3>${e.title}</h3>
           <p>${e.text}</p>
-          <a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Подробнее</a>
+          <a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Смотреть детали в группе</a>
         </div>
       </article>`).join('');
   }
@@ -466,6 +477,13 @@
     if(!pop.hasAttribute('hidden') && !pop.contains(e.target) && e.target!==sBtn) setPop(false);
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')setPop(false);});
+
+  // mobile burger menu
+  const burger=document.getElementById('burger'), navLinks=document.getElementById('navLinks');
+  function setMenu(open){navLinks.classList.toggle('open',open);burger.setAttribute('aria-expanded',open?'true':'false');burger.textContent=open?'✕':'☰';}
+  burger.addEventListener('click',e=>{e.stopPropagation();setMenu(!navLinks.classList.contains('open'));});
+  navLinks.addEventListener('click',e=>{if(e.target.tagName==='A')setMenu(false);});
+  document.addEventListener('click',e=>{if(navLinks.classList.contains('open')&&!navLinks.contains(e.target)&&e.target!==burger)setMenu(false);});
 
   // fizzing dots
   const fizz=document.getElementById('fizz');
