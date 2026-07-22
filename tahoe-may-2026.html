@@ -37,14 +37,26 @@
   .sec-t{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:24px}
   .sec-t small{display:block;font-family:'Montserrat';text-transform:none;font-weight:600;font-size:.9rem;color:var(--muted);letter-spacing:0;margin-top:6px}
 
-  .videos{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .videos video{width:100%;border-radius:10px;border:2px solid var(--ink);background:#000;display:block;box-shadow:8px 8px 0 rgba(74,156,45,.18)}
+  .videos{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;justify-content:center}
+  .videos video{max-height:72vh;max-width:100%;width:auto;height:auto;border-radius:10px;border:2px solid var(--ink);background:#000;display:block;box-shadow:8px 8px 0 rgba(74,156,45,.18)}
 
   .grid{columns:4 240px;column-gap:14px}
   .g-item{break-inside:avoid;margin:0 0 14px;display:block;border-radius:10px;overflow:hidden;border:2px solid var(--ink);cursor:zoom-in;background:var(--yellow);position:relative}
   .g-item img{width:100%;display:block;transition:transform .3s}
   .g-item:hover img{transform:scale(1.04)}
 
+  .signup-cta{background:var(--yellow);text-align:center;padding:64px 0;position:relative;overflow:hidden}
+  .signup-cta::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:var(--green);transform:scaleX(.3);transform-origin:left}
+  .signup-cta .eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.72rem;font-weight:700;color:rgba(20,20,20,.6);margin-bottom:12px}
+  .sc-h{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:clamp(2rem,6vw,3.4rem);line-height:1;margin-bottom:12px}
+  .signup-cta p{color:rgba(20,20,20,.72);max-width:46ch;margin:0 auto 22px;font-size:1.04rem}
+  .signup{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:540px;margin:0 auto}
+  .signup input{flex:1 1 240px;min-width:0;padding:14px 18px;border:2px solid var(--ink);border-radius:999px;font:inherit;background:#fff}
+  .signup input:focus-visible{outline:3px solid rgba(74,156,45,.35)}
+  .signup button{padding:14px 26px;border:2px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--yellow);font-weight:700;cursor:pointer;white-space:nowrap}
+  .signup button:hover{box-shadow:0 0 0 4px rgba(74,156,45,.24)}
+  .sc-note{margin-top:16px;font-size:.9rem;color:rgba(20,20,20,.7)}
+  .sc-note a{color:var(--ink);font-weight:700}
   footer{background:var(--ink);color:rgba(255,255,255,.6);padding:40px 0;font-size:.85rem;text-align:center}
   footer a{color:var(--yellow);text-decoration:none}
 
@@ -60,7 +72,7 @@
   .lb .ct{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:rgba(255,255,255,.75);font-size:.85rem}
 
   @media(max-width:640px){
-    .videos{grid-template-columns:1fr}
+    .videos video{max-height:66vh}
     .grid{columns:2 150px}
     header.hd{padding:48px 0 44px}
     .lb .pv,.lb .nx{font-size:2rem}
@@ -98,6 +110,19 @@
   <div class="wrap">
     <h2 class="sec-t">фотографии<small>нажми на кадр, чтобы открыть</small></h2>
     <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="signup-cta">
+  <div class="wrap">
+    <div class="eyebrow">Next tours</div>
+    <h2 class="sc-h">не пропусти следующий тур</h2>
+    <p>Оставь email — напишем, когда откроется набор на новую поездку.</p>
+    <form class="signup" id="signup" novalidate>
+      <input type="email" id="signup-email" placeholder="твой email" autocomplete="email" aria-label="Email" required>
+      <button type="submit">Сообщить о турах</button>
+    </form>
+    <p class="sc-note" id="signup-note">Или следи за анонсами в <a href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">группе «Физкультурники»</a>.</p>
   </div>
 </section>
 
@@ -143,6 +168,18 @@
     if(e.key==='Escape')close();
     if(e.key==='ArrowRight')show(cur+1);
     if(e.key==='ArrowLeft')show(cur-1);
+  });
+
+  // email signup (no backend — opens a pre-filled email to Anna)
+  const suForm=document.getElementById('signup'), suEmail=document.getElementById('signup-email'), suNote=document.getElementById('signup-note');
+  suForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    const v=suEmail.value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){suNote.textContent='Проверь email — кажется, есть опечатка.';return;}
+    const subj=encodeURIComponent('Хочу узнавать о турах Anna Club');
+    const body=encodeURIComponent('Добавьте меня в список анонсов о фитнес-турах Anna Club.\nEmail: '+v);
+    window.location.href='mailto:anna@anna.club?subject='+subj+'&body='+body;
+    suNote.innerHTML='Спасибо! Открылся почтовый клиент — отправь письмо, и Анна добавит тебя в список.';
   });
 </script>
 </body>
