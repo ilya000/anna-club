@@ -33,6 +33,15 @@
   .hd .stats{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
   .hd .stats span{border:2px solid var(--yellow);color:var(--yellow);border-radius:999px;padding:7px 14px;font-weight:800;font-size:.8rem}
 
+  .tour-intro{background:var(--paper);padding:54px 0 6px}
+  .tour-intro .wrap{max-width:768px}
+  .tour-intro p{font-size:1.1rem;color:var(--ink);margin-bottom:16px;line-height:1.66}
+  .tour-intro .lead{font-size:1.28rem;font-weight:600}
+  .tour-intro .tour-sign{font-family:'Anton',sans-serif;text-transform:lowercase;color:var(--green);font-size:1.2rem;margin-top:6px}
+  .next-tours{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 auto 22px;max-width:560px}
+  .next-tours .nt{background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;font-size:.86rem;font-weight:600}
+  .next-tours .nt b{color:var(--yellow)}
+
   section{padding:56px 0}
   .sec-t{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:24px}
   .sec-t small{display:block;font-family:'Montserrat';text-transform:none;font-weight:600;font-size:.9rem;color:var(--muted);letter-spacing:0;margin-top:6px}
@@ -91,10 +100,19 @@
     <div class="eyebrow">Fitness tour · recap</div>
     <h1 class="display">tahoe</h1>
     <div class="sub">may 2026</div>
-    <p>Выездной фитнес-тур «Физкультурников» на Лейк-Тахо: тренировки на природе и на кортах, йога, заплывы в бассейне, походы, арт-класс и, конечно, правильная еда. Несколько дней движения, смеха и команды.</p>
+    <p>Лейк-Тахо, Калифорния · со среды по воскресенье · выездной тур «Физкультурников» Anna Club.</p>
     <div class="stats"><span>50 фото</span><span>2 видео</span><span>Lake Tahoe, CA</span></div>
   </div>
 </header>
+
+<section class="tour-intro">
+  <div class="wrap">
+    <p class="lead">Последний знаменитый фитнес тур на озере Тахо, всегда со среды по воскресенье. Все похудели на 2-3 кг и подтянули свои булки!)))</p>
+    <p>Посмотрите, как классно заниматься и смотреть на вековые ели, огромные шишки размером с голову, делать аквааэробику в подогреваемом бассейне! А наше фитнес пропитание я жду полгода! Потому что салаты трудоемкие, реально дома сам часто не сделаешь — вкуснота!!!</p>
+    <p>Вечерами играем в игры, выходим в город, но вишенкой на торте (а в нашем случае на его отсутствии))) — всегда рисование маслом! Шедевры получаются просто у всех! Не знаю, как это работает :) Вот такой фитнес апгрейт!</p>
+    <div class="tour-sign">— Анна Прасикова</div>
+  </div>
+</section>
 
 <section>
   <div class="wrap">
@@ -117,6 +135,10 @@
   <div class="wrap">
     <div class="eyebrow">Next tours</div>
     <h2 class="sc-h">не пропусти следующий тур</h2>
+    <div class="next-tours">
+      <div class="nt"><b>28 окт – 1 нояб 2026</b> · Клирвотер, Флорида</div>
+      <div class="nt"><b>27–30 мая 2027</b> · Тахо, Калифорния</div>
+    </div>
     <p>Оставь email — напишем, когда откроется набор на новую поездку.</p>
     <form class="signup" id="signup" novalidate>
       <input type="email" id="signup-email" placeholder="твой email" autocomplete="email" aria-label="Email" required>
