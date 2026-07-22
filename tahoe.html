@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anna Club — Fitness tour · Tahoe, May 2026</title>
+<meta name="description" content="Photos and videos from the Anna Club fitness tour to Lake Tahoe, May 2026.">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--yellow:#F8CF43;--green:#4A9C2D;--ink:#141414;--white:#fff;--paper:#fffdf5;--muted:rgba(20,20,20,.62);--line:rgba(20,20,20,.14);--max:1180px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  .display{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:lowercase;line-height:.92}
+
+  .bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(255,253,245,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar .brand{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:1.4rem;text-decoration:none;color:var(--ink)}
+  .bar .back{font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink);opacity:.8}
+  .bar .back:hover{opacity:1}
+
+  header.hd{background:var(--ink);color:var(--white);padding:64px 0 58px;position:relative;overflow:hidden}
+  header.hd::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--green);transform:scaleX(.34);transform-origin:left}
+  .hd .eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.74rem;font-weight:700;color:var(--yellow);margin-bottom:14px}
+  .hd h1{font-size:clamp(2.8rem,8vw,5.6rem);color:var(--yellow)}
+  .hd .sub{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(1rem,2.4vw,1.5rem);margin-top:6px}
+  .hd p{margin-top:18px;max-width:56ch;color:rgba(255,255,255,.78);font-size:1.06rem}
+  .hd .stats{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+  .hd .stats span{border:2px solid var(--yellow);color:var(--yellow);border-radius:999px;padding:7px 14px;font-weight:800;font-size:.8rem}
+
+  section{padding:56px 0}
+  .sec-t{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:24px}
+  .sec-t small{display:block;font-family:'Montserrat';text-transform:none;font-weight:600;font-size:.9rem;color:var(--muted);letter-spacing:0;margin-top:6px}
+
+  .videos{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .videos video{width:100%;border-radius:10px;border:2px solid var(--ink);background:#000;display:block;box-shadow:8px 8px 0 rgba(74,156,45,.18)}
+
+  .grid{columns:4 240px;column-gap:14px}
+  .g-item{break-inside:avoid;margin:0 0 14px;display:block;border-radius:10px;overflow:hidden;border:2px solid var(--ink);cursor:zoom-in;background:var(--yellow);position:relative}
+  .g-item img{width:100%;display:block;transition:transform .3s}
+  .g-item:hover img{transform:scale(1.04)}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:40px 0;font-size:.85rem;text-align:center}
+  footer a{color:var(--yellow);text-decoration:none}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(10,10,10,.94);display:none;align-items:center;justify-content:center}
+  .lb.on{display:flex}
+  .lb img{max-width:92vw;max-height:88vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lb button{position:absolute;background:none;border:0;color:#fff;cursor:pointer;font-size:2.4rem;line-height:1;padding:14px;opacity:.85}
+  .lb button:hover{opacity:1}
+  .lb .cl{top:8px;right:14px;font-size:2.6rem}
+  .lb .pv{left:6px;top:50%;transform:translateY(-50%)}
+  .lb .nx{right:6px;top:50%;transform:translateY(-50%)}
+  .lb .ct{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:rgba(255,255,255,.75);font-size:.85rem}
+
+  @media(max-width:640px){
+    .videos{grid-template-columns:1fr}
+    .grid{columns:2 150px}
+    header.hd{padding:48px 0 44px}
+    .lb .pv,.lb .nx{font-size:2rem}
+  }
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <a class="brand" href="index.html">anna&nbsp;club</a>
+  <a class="back" href="index.html">← На главную</a>
+</nav>
+
+<header class="hd">
+  <div class="wrap">
+    <div class="eyebrow">Fitness tour · recap</div>
+    <h1 class="display">tahoe</h1>
+    <div class="sub">may 2026</div>
+    <p>Выездной фитнес-тур «Физкультурников» на Лейк-Тахо: тренировки на природе и на кортах, йога, заплывы в бассейне, походы, арт-класс и, конечно, правильная еда. Несколько дней движения, смеха и команды.</p>
+    <div class="stats"><span>21 фото</span><span>2 видео</span><span>Lake Tahoe, CA</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 class="sec-t">видео<small>тренировка на корте · отзыв участницы</small></h2>
+    <div class="videos">
+      <video src="assets/tahoe/vid1.mp4" poster="assets/tahoe/vid1.jpg" controls preload="none" playsinline></video>
+      <video src="assets/tahoe/vid2.mp4" poster="assets/tahoe/vid2.jpg" controls preload="none" playsinline></video>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 class="sec-t">фотографии<small>нажми на кадр, чтобы открыть</small></h2>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Anna Club LLC · <a href="index.html">anna.club</a> · Fitness tour · Tahoe, May 2026
+  </div>
+</footer>
+
+<div class="lb" id="lb">
+  <button class="cl" aria-label="Закрыть">×</button>
+  <button class="pv" aria-label="Назад">‹</button>
+  <img id="lbimg" src="" alt="">
+  <button class="nx" aria-label="Вперёд">›</button>
+  <div class="ct" id="lbct"></div>
+</div>
+
+<script>
+  const N = 21;
+  const grid = document.getElementById('grid');
+  const frag = document.createDocumentFragment();
+  for(let i=1;i<=N;i++){
+    const n = String(i).padStart(2,'0');
+    const a = document.createElement('a');
+    a.className='g-item'; a.href='assets/tahoe/t'+n+'.jpg'; a.dataset.i=i-1;
+    a.innerHTML = '<img loading="lazy" src="assets/tahoe/t'+n+'_t.jpg" alt="Tahoe '+i+'">';
+    frag.appendChild(a);
+  }
+  grid.appendChild(frag);
+
+  const items=[...document.querySelectorAll('.g-item')];
+  const lb=document.getElementById('lb'), lbimg=document.getElementById('lbimg'), lbct=document.getElementById('lbct');
+  let cur=0;
+  function show(i){cur=(i+N)%N; lbimg.src=items[cur].getAttribute('href'); lbct.textContent=(cur+1)+' / '+N; lb.classList.add('on');}
+  function close(){lb.classList.remove('on'); lbimg.src='';}
+  items.forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();show(i);}));
+  lb.querySelector('.cl').addEventListener('click',close);
+  lb.querySelector('.nx').addEventListener('click',e=>{e.stopPropagation();show(cur+1);});
+  lb.querySelector('.pv').addEventListener('click',e=>{e.stopPropagation();show(cur-1);});
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowRight')show(cur+1);
+    if(e.key==='ArrowLeft')show(cur-1);
+  });
+</script>
+</body>
+</html>

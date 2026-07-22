@@ -115,6 +115,19 @@
   .card h3{font-size:1.18rem;font-weight:700}
   .card p{color:var(--muted);font-size:.97rem}
 
+  /* tour feature */
+  .tour-feature{background:var(--paper)}
+  .tf-head{max-width:56ch;margin-bottom:30px}
+  .tf-head .eyebrow{color:var(--muted);margin-bottom:12px}
+  .tf-head h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:lowercase;font-size:clamp(2.4rem,6vw,4rem);line-height:1;margin-bottom:14px}
+  .tf-head p{color:var(--muted);font-size:1.05rem;margin-bottom:20px}
+  .tf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tf-cell{aspect-ratio:4/5;border:2px solid var(--ink);border-radius:10px;overflow:hidden;display:block;background:var(--yellow);position:relative}
+  .tf-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+  .tf-cell:hover img{transform:scale(1.06)}
+  .tf-cell .badge{position:absolute;left:10px;bottom:10px;background:var(--ink);color:var(--yellow);font-weight:800;font-size:.72rem;padding:5px 10px;border-radius:999px}
+  @media(max-width:640px){.tf-grid{grid-template-columns:1fr 1fr}}
+
   /* schedule */
   .schedule-shell{position:relative}
   .schedule-shell::before{content:"PTminder live";position:absolute;right:18px;top:-18px;background:var(--green);color:var(--yellow);border:2px solid var(--ink);border-radius:999px;padding:7px 14px;font-weight:800;font-size:.78rem;z-index:2}
@@ -163,6 +176,9 @@
   .gallery .ph img{width:100%;height:100%;object-fit:cover;display:block}
   .gallery .ph.placeholder{display:flex;align-items:center;justify-content:center}
   .gallery .ph.placeholder svg{width:64px;height:64px;opacity:.55}
+  a.ph{cursor:pointer}
+  .tl-more{display:inline-block;margin-top:14px;color:var(--yellow);font-weight:700;font-size:.9rem;text-decoration:none}
+  .tl-more:hover{text-decoration:underline}
 
   /* join */
   .join{background:var(--yellow);text-align:center;position:relative;overflow:hidden}
@@ -326,6 +342,24 @@
   </div>
 </section>
 
+<!-- ============ LATEST TOUR (Tahoe) ============ -->
+<section class="tour-feature" id="tahoe">
+  <div class="wrap">
+    <div class="tf-head">
+      <div class="eyebrow">Latest fitness tour</div>
+      <h2>tahoe · май 2026</h2>
+      <p>Несколько дней тренировок на природе и на кортах, йоги, заплывов в бассейне, походов и правильной еды на Лейк-Тахо. 21 фото и 2 видео — в галерее.</p>
+      <a class="btn btn-solid" href="tahoe.html">Смотреть все фото и видео →</a>
+    </div>
+    <div class="tf-grid">
+      <a class="tf-cell" href="tahoe.html"><img src="assets/tahoe/t02_t.jpg" alt="Фитнес-тур Тахо — группа на берегу" loading="lazy"><span class="badge">Tahoe</span></a>
+      <a class="tf-cell" href="tahoe.html"><img src="assets/tahoe/t03_t.jpg" alt="Фитнес-тур Тахо — команда" loading="lazy"></a>
+      <a class="tf-cell" href="tahoe.html"><img src="assets/tahoe/t05_t.jpg" alt="Фитнес-тур Тахо — тренировка" loading="lazy"></a>
+      <a class="tf-cell" href="tahoe.html"><img src="assets/tahoe/t14_t.jpg" alt="Фитнес-тур Тахо — бассейн" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SCHEDULE (PTminder) ============ -->
 <section id="schedule">
   <div class="wrap">
@@ -408,7 +442,7 @@
   // Лента прошедшего — сверху новое. Здесь заведены реальные вехи;
   // фото подставим из группы/архива (пока — плейсхолдеры).
   const TIMELINE = [
-    { year:'2025', title:'Фитнес-тур на Тахо', text:'Выездной ретрит на Лейк-Тахо: тренировки на природе, озеро, баня и команда. Десятки фото с поездки.', photos:[] },
+    { year:'май 2026', title:'Фитнес-тур на Тахо', text:'Выездной ретрит на Лейк-Тахо: тренировки на природе и на кортах, йога, заплывы в бассейне, походы и правильная еда. 21 фото и 2 видео в галерее.', photos:['assets/tahoe/t01_t.jpg','assets/tahoe/t03_t.jpg','assets/tahoe/t11_t.jpg','assets/tahoe/t14_t.jpg'], link:'tahoe.html' },
     { year:'зож', title:'Серьёзно, но с юмором', text:'У Anna Club дисциплина не отменяет смех. Иногда самый точный совет по питанию звучит так, что его уже невозможно забыть.', photos:['assets/anna-nutrition.jpg'] },
     { year:'2024', title:'Сборы и выезды', text:'Групповые тренировки на природе и совместные выезды — фитнес как повод собраться и попутешествовать.', photos:[] },
     { year:'San Francisco', title:'Выезд к Palace of Fine Arts', text:'Большой групповой сбор «Физкультурников» — фирменное фото с поднятыми руками у Дворца изящных искусств.', photos:[] },
@@ -447,13 +481,17 @@
     const el=document.getElementById('timeline');
     el.innerHTML=TIMELINE.map(t=>{
       const photos=(t.photos&&t.photos.length)
-        ? t.photos.map(p=>`<div class="ph"><img src="${p}" alt=""></div>`).join('')
+        ? t.photos.map(p=> t.link
+            ? `<a class="ph" href="${t.link}"><img src="${p}" alt="" loading="lazy"></a>`
+            : `<div class="ph"><img src="${p}" alt="" loading="lazy"></div>`).join('')
         : `<div class="ph placeholder" title="фото скоро">${BALL}</div>`;
+      const more = t.link ? `<a class="tl-more" href="${t.link}">Смотреть галерею →</a>` : '';
       return `<div class="tl-item">
         <div class="tl-year">${t.year}</div>
         <h3>${t.title}</h3>
         <p>${t.text}</p>
         <div class="gallery">${photos}</div>
+        ${more}
       </div>`;
     }).join('');
   }
