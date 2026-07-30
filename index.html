@@ -428,14 +428,15 @@
 <script>
   /* =====================================================================
      КОНТЕНТ САЙТА. Чтобы добавить событие — допиши объект в массив.
-     Поля: when (RU подпись даты), title (RU), text (RU), img (необязательно).
+     Поля: when (RU подпись даты), title (RU), text (RU), cover (необязательно),
+     link (необязательно — страница тура; если нет, кнопка ведёт в группу).
      Фото клади в assets/ и укажи имя файла в photos: ['assets/file.jpg'].
      Если photos пуст — покажется фирменный плейсхолдер (точечный шар).
      ===================================================================== */
 
   // Ближайшие события (анонсы). Пусто => показываем приглашение в группу.
   const UPCOMING = [
-    { when:'28 окт – 1 нояб 2026', title:'Фитнес-тур · Клирвотер, Флорида', text:'Следующая выездная поездка Anna Club — Clearwater, FL. Тренировки, фитнес-питание и команда у океана. Детали и запись — в группе «Физкультурники».', cover:'assets/clearwater.jpg' },
+    { when:'28 окт – 1 нояб 2026', title:'Фитнес-тур · Клирвотер, Флорида', text:'Следующая выездная поездка Anna Club — Clearwater Beach, FL. Две тренировки в день, низкоуглеводное меню, арт-проект и музей Дали. Программа, цены и запись — на странице тура.', cover:'assets/clearwater.jpg', link:'clearwater-oct-2026.html' },
     { when:'27–30 мая 2027', title:'Фитнес-тур · Тахо, Калифорния', text:'Снова на озеро Тахо: тренировки среди вековых елей, аквааэробика, фирменные салаты и рисование маслом. Детали и запись — в группе «Физкультурники».', cover:'assets/tahoe/t05_t.jpg' },
   ];
 
@@ -465,16 +466,20 @@
       </div>`;
       return;
     }
-    el.innerHTML=UPCOMING.map(e=>`
-      <article class="event">
-        <div class="thumb">${e.cover?`<img src="${e.cover}" alt="">`:BALL}</div>
+    el.innerHTML=UPCOMING.map(e=>{
+      const thumb=e.cover?`<img src="${e.cover}" alt="">`:BALL;
+      const cta=e.link
+        ? `<a class="btn btn-ghost" href="${e.link}">Программа и запись →</a>`
+        : `<a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Смотреть детали в группе</a>`;
+      return `<article class="event">
+        ${e.link?`<a class="thumb" href="${e.link}">${thumb}</a>`:`<div class="thumb">${thumb}</div>`}
         <div class="body">
           <span class="when">${e.when}</span>
           <h3>${e.title}</h3>
           <p>${e.text}</p>
-          <a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Смотреть детали в группе</a>
+          ${cta}
         </div>
-      </article>`).join('');
+      </article>`;}).join('');
   }
 
   function renderTimeline(){
