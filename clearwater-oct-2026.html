@@ -60,18 +60,36 @@
   .collage .badge{position:absolute;left:12px;bottom:12px;background:var(--ink);color:var(--yellow);font-weight:800;font-size:.74rem;padding:6px 12px;border-radius:999px}
 
   /* day cards */
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
   .card{position:relative;background:var(--white);border:2px solid var(--ink);border-radius:8px;padding:30px 24px 26px}
   .card::after{content:"";position:absolute;left:24px;top:20px;width:44px;height:6px;background:var(--green)}
   .card h3{font-size:1.1rem;font-weight:700;margin:14px 0 8px}
   .card p{color:var(--muted);font-size:.96rem}
   .card .tag{font-family:'Anton',sans-serif;font-size:2rem;color:rgba(20,20,20,.12);position:absolute;right:18px;top:10px}
 
+  /* portrait in intro */
+  .portrait{margin:26px auto 0;max-width:768px;border:2px solid var(--ink);border-radius:10px;overflow:hidden;position:relative}
+  .portrait img{width:100%;display:block}
+  .portrait .badge{position:absolute;left:12px;bottom:12px;background:var(--ink);color:var(--yellow);font-weight:800;font-size:.74rem;padding:6px 12px;border-radius:999px}
+
+  /* evenings */
+  .eves{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .eve{border:2px solid var(--ink);border-radius:8px;background:var(--white);padding:24px;display:flex;flex-direction:column;gap:8px}
+  .eve .d{font-family:'Anton',sans-serif;text-transform:lowercase;font-size:1.5rem;line-height:1;color:var(--green)}
+  .eve h3{font-size:1.02rem;font-weight:700}
+  .eve p{color:var(--muted);font-size:.96rem}
+  .eve.hw{background:var(--ink);border-color:var(--ink)}
+  .eve.hw .d{color:var(--yellow)}
+  .eve.hw h3{color:var(--white)}
+  .eve.hw p{color:rgba(255,255,255,.72)}
+
   /* food */
   .food{background:var(--yellow)}
   .food .sec-sub{color:rgba(20,20,20,.72)}
   .meals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
-  .meal{background:var(--paper);border:2px solid var(--ink);border-radius:8px;padding:22px}
+  .meal{background:var(--paper);border:2px solid var(--ink);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .meal img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-bottom:2px solid var(--ink)}
+  .meal .txt{padding:20px 22px}
   .meal b{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px}
   .meal span{color:var(--muted);font-size:.97rem}
   .food .note{margin-top:18px;font-size:.92rem;color:rgba(20,20,20,.72);max-width:70ch}
@@ -108,6 +126,7 @@
   .room .st.taken{background:rgba(20,20,20,.08);color:rgba(20,20,20,.55)}
   .room.taken{opacity:.62}
   .rooms-note{margin-top:16px;font-size:.9rem;color:var(--muted)}
+  .rooms-note a{font-weight:700;color:var(--ink)}
 
   /* included */
   .incl{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px}
@@ -145,7 +164,7 @@
   footer .credits a{color:rgba(255,255,255,.6)}
 
   @media(max-width:820px){
-    .cards,.meals,.logi{grid-template-columns:1fr}
+    .cards,.meals,.logi,.eves{grid-template-columns:1fr}
     .collage{grid-template-columns:1fr;grid-template-rows:none}
     .collage .c1{grid-row:auto;aspect-ratio:4/3}
     .collage .c2,.collage .c3{aspect-ratio:16/9}
@@ -170,8 +189,8 @@
     <div class="eyebrow">Fitness tour · анонс</div>
     <h1 class="display">clearwater</h1>
     <div class="sub">28 октября — 1 ноября 2026</div>
-    <p>Clearwater Beach, Флорида · со среды по воскресенье · похудательно-развлекательный фитнес-тур Anna Club: тренировки утром и вечером, низкоуглеводное меню, пляж, арт и музей Дали на десерт.</p>
-    <div class="stats"><span>5 дней тренировок</span><span>утро + вечер</span><span>минус 1–3 кг</span><span>вторая линия моря</span></div>
+    <p>Clearwater Beach, Флорида · со среды по воскресенье · похудательно-развлекательный фитнес-тур Anna Club: тренировки утром и вечером, низкоуглеводное меню, чайная церемония, вечер красоты, арт-проект, Halloween — и музей Дали на десерт.</p>
+    <div class="stats"><span>5 дней тренировок</span><span>утро + вечер</span><span>минус 1–3 кг</span><span>осталось 1 место</span></div>
     <div class="cta-row">
       <a class="btn btn-yellow" href="#book">Забронировать место</a>
       <a class="btn btn-yellow" style="background:transparent;color:var(--yellow)" href="#stay">Цены и проживание</a>
@@ -185,6 +204,7 @@
     <p>Покажу правильную технику, научу тому, что раньше казалось невыполнимым — бегать, например. Проведу лекцию, почему мышечная масса так важна после 40 лет. Разгрузимся по питанию на низкоуглеводном меню — приятный бонус: минус 1–3 кг. Обещаю! ))) И расскажу, как удержать результат после тура.</p>
     <p>А ещё — новые люди, новые места и законный отдых от семьи )))</p>
     <div class="tour-sign">— Анна Прасикова</div>
+    <div class="portrait"><img src="assets/clearwater/anna-beach.jpg" alt="Анна Прасикова на пляже во Флориде"><span class="badge">Ваш фитнес-тренер .аннА</span></div>
   </div>
 </section>
 
@@ -203,9 +223,10 @@
     <h2 class="sec-t">как устроен день</h2>
     <p class="sec-sub">Тренируемся пять дней: в день заезда — только вечерняя тренировка, в день выезда — только утренняя. Каждому подберу свой темп и нагрузку — если кто чего побаивается, объясню и научу.</p>
     <div class="cards">
-      <div class="card"><span class="tag">AM</span><h3>Утро</h3><p>Бег, силовая с амортизаторами и аквааэробика в тёплом бассейне.</p></div>
+      <div class="card"><span class="tag">AM</span><h3>Утро</h3><p>Бег, силовая с амортизаторами и аквааэробика.</p></div>
+      <div class="card"><span class="tag">1–4</span><h3>День</h3><p>Свободное время: двое уходят на массаж (разделимся по дням), остальные отдыхают или идут на пляж.</p></div>
       <div class="card"><span class="tag">PM</span><h3>Вечер</h3><p>На выбор: баланс, пилатес, парная йога или растяжка.</p></div>
-      <div class="card"><span class="tag">40+</span><h3>Лекция</h3><p>Почему мышечная масса так важна после 40 лет — и как поддержать результат после тура.</p></div>
+      <div class="card"><span class="tag">40+</span><h3>Лекция</h3><p>В субботу расскажу, как работают мышцы, чем их питать и почему мышечная масса так важна после 40 лет.</p></div>
     </div>
   </div>
 </section>
@@ -215,23 +236,43 @@
     <h2 class="sec-t">питание</h2>
     <p class="sec-sub">Низкоуглеводное меню: без мяса, круп, картошки, молочки, хлебобулочных изделий, рафинированного сахара, соли и масла. Салаты фирменные — дома такие сам не сделаешь.</p>
     <div class="meals">
-      <div class="meal"><b>Завтрак</b><span>перед тренировкой — фрукт и чай / кофе</span></div>
-      <div class="meal"><b>Обед</b><span>яичница из трёх яиц и овощи</span></div>
-      <div class="meal"><b>Ужин</b><span>рыба и салат</span></div>
+      <div class="meal"><img src="assets/clearwater/food-breakfast.jpg" alt="Тарелка с манго, клубникой и ягодами" loading="lazy"><div class="txt"><b>Завтрак</b><span>фрукты, ягоды и чай / кофе</span></div></div>
+      <div class="meal"><img src="assets/clearwater/food-lunch.jpg" alt="Омлет из трёх яиц с овощами и зеленью" loading="lazy"><div class="txt"><b>Обед</b><span>яичница из трёх яиц и овощи</span></div></div>
+      <div class="meal"><img src="assets/clearwater/food-dinner.jpg" alt="Запечённая рыба на салате с кедровыми орешками" loading="lazy"><div class="txt"><b>Ужин</b><span>рыба и салат</span></div></div>
     </div>
-    <p class="note">Меню составлю ближе к туру и оговорю со всеми — если кто-то что-то не ест, учтём. Шампанское, кстати, в стоимость входит :)</p>
+    <p class="note">Фото — с прошлых туров, меню всегда разное. Составлю ближе к дате и оговорю со всеми: если кто-то чего-то не ест, учтём. Шампанское, кстати, в стоимость входит :)</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <h2 class="sec-t">не только спорт</h2>
-    <p class="sec-sub">Вечера и паузы между тренировками — это отдельная программа.</p>
-    <div class="fun">
+    <h2 class="sec-t">как мы проводим вечера</h2>
+    <p class="sec-sub">После вечерней тренировки каждый день — своя программа. Это, честно говоря, половина смысла тура.</p>
+    <div class="eves">
+      <div class="eve">
+        <div class="d">среда</div>
+        <h3>Вечер знакомства</h3>
+        <p>Прогулка или пробежка по пляжу и аквааэробика прямо в океане. А там, кто знает — дискотека совсем рядом :)))</p>
+      </div>
+      <div class="eve">
+        <div class="d">четверг</div>
+        <h3>Tea Ceremony &amp; Sound Bath</h3>
+        <p>Проводят Marina Kruk и Emerie Star. Чай из натуральных трав успокоит и подготовит к завтрашним свершениям, а звуковая ванна погрузит в мир вибраций и снимет усталость после первого тренировочного дня — лёжа на матрасиках под шёлковыми одеялами.</p>
+      </div>
+      <div class="eve">
+        <div class="d">пятница красоты</div>
+        <h3>Beauty Facial</h3>
+        <p>К нам приходит Ольга Вертхейм, создательница косметики <a href="https://www.facebook.com/ollie.wertheim" target="_blank" rel="noopener" style="font-weight:700">Sensitive Skin</a> — 100% bioactive, organic, high-performance. В этом году её линия получила золотую награду за инновации в натуральной косметике. Сделает нам уход и научит самим делать массаж лица.</p>
+      </div>
+      <div class="eve hw">
+        <div class="d">суббота</div>
+        <h3>Арт-проект и Halloween</h3>
+        <p>Традиционный арт-вечер: напишем картину, которую увезёте с собой. И это же вечер Halloween — берите костюмы, в последний вечер пойдём гулять по ночной улице! Но никаких конфет ))))))</p>
+      </div>
+    </div>
+    <div class="fun" style="margin-top:18px">
       <div><b>Пляж и море</b><span>белый песок Клирвотера — в двух шагах от дома</span></div>
-      <div><b>Игры</b><span>знаменитый «Ёрш», «Шестой берёт», «Крокодил»</span></div>
-      <div><b>Арт-проект</b><span>рисование маслом — увезёте с собой картину!</span></div>
-      <div><b>Beauty Facial</b><span>уход от создательницы органической косметики Sensitive Skin</span></div>
+      <div><b>Игры</b><span>знаменитый «Ёрш», «Шестой берёт», «Крокодил», «Эрудит»</span></div>
       <div><b>Массаж</b><span>по желанию, $120/час (в стоимость не входит)</span></div>
       <div><b>Шампанское</b><span>куда же без него — входит в стоимость :)</span></div>
     </div>
@@ -241,7 +282,7 @@
 <section class="dali">
   <div class="wrap">
     <h2 class="sec-t">финал — музей дали</h2>
-    <p class="sec-sub">В воскресенье в 14:00 выезжаем из Клирвотера и едем в St. Petersburg — в музей Сальвадора Дали, вторую по величине коллекцию после Испании. Для неё штат Флорида построил уникальное противоураганное здание. Я выступлю гидом — обожаю этот музей! Билет уже включён в стоимость тура.</p>
+    <p class="sec-sub">В воскресенье в 14:00 выезжаем из Клирвотера и едем в St. Petersburg — в музей Сальвадора Дали, вторую по величине коллекцию после Испании. Для неё штат Флорида построил уникальное противоураганное здание. Я выступлю гидом — обожаю этот музей, была там семь раз и каждый раз вижу в его работах что-то новое. Билет уже включён в стоимость тура.</p>
     <div class="dali-grid">
       <div class="c"><img src="assets/clearwater/dali-ext.jpg" alt="Здание музея Сальвадора Дали в Сент-Питерсберге"><span class="badge">The Dalí Museum · St. Pete</span></div>
       <div class="c"><img src="assets/clearwater/dali-stairs.jpg" alt="Спиральная лестница внутри музея Дали"></div>
@@ -256,15 +297,14 @@
 <section id="stay">
   <div class="wrap">
     <h2 class="sec-t">проживание и цены</h2>
-    <p class="stay-note">Живём в трёхуровневой квартире на второй линии моря в Clearwater Beach, два отдельных санузла. Я живу на первом уровне, вы — на втором и третьем. <a href="https://www.instagram.com/reel/CzCQh2nx4w5/" target="_blank" rel="noopener">Посмотреть квартиру (видео) →</a></p>
+    <p class="stay-note">Живём все вместе в квартире на Clearwater Beach — 445 Hamden Dr, в нескольких минутах пешком от океана. Всего пять спальных мест, четыре уже заняты. <a href="https://www.dropbox.com/scl/fi/219oiilytzojfjjds1vnv/f8a6892c-a077-4834-9ee2-eb8eefcb6a3d.MOV?rlkey=mpqem0kdn18pn78al6wsir0ck&amp;dl=0" target="_blank" rel="noopener">Посмотреть квартиру (видео) →</a></p>
     <div class="rooms">
-      <div class="room taken"><span class="nm">Твин-кровать · 2-й уровень</span><span class="pr">$1350</span><span class="st taken">Занято</span></div>
-      <div class="room"><span class="nm">Квин-матрас · 2-й уровень <small style="color:var(--muted);font-weight:600">(очень удобный, сама на таком сплю)</small></span><span class="pr">$1450</span><span class="st free">Свободно</span></div>
-      <div class="room"><span class="nm">Фул-диван · 2-й уровень <small style="color:var(--muted);font-weight:600">(удобный и ровный)</small></span><span class="pr">$1450</span><span class="st free">Свободно</span></div>
-      <div class="room taken"><span class="nm">Кинг-кровать · 2-й уровень</span><span class="pr">$1850 <small style="font-family:Montserrat;font-size:.8rem;font-weight:600">или вдвоём по $1250</small></span><span class="st taken">Занято</span></div>
-      <div class="room taken"><span class="nm">Квин-кровать · 3-й уровень</span><span class="pr">$1650</span><span class="st taken">Занято</span></div>
+      <div class="room taken"><span class="nm">Диван в зале</span><span class="pr">$1350</span><span class="st taken">Занято</span></div>
+      <div class="room taken"><span class="nm">Кинг-кровать, вдвоём <small style="color:var(--muted);font-weight:600">(два места)</small></span><span class="pr">$1350 <small style="font-family:Montserrat;font-size:.8rem;font-weight:600">с человека</small></span><span class="st taken">Занято</span></div>
+      <div class="room taken"><span class="nm">Фул-кровать</span><span class="pr">$1750</span><span class="st taken">Занято</span></div>
+      <div class="room"><span class="nm">Фул-кровать</span><span class="pr">$1750</span><span class="st free">Свободно</span></div>
     </div>
-    <p class="rooms-note">Статус мест — на июль 2026. Свободные места уточняй у Анны: <a href="mailto:anna@anna.club" style="font-weight:700;color:var(--ink)">anna@anna.club</a></p>
+    <p class="rooms-note">Статус мест — на 20 августа 2026. Осталось одно место. Пиши или звони Анне: <a href="mailto:anna@anna.club">anna@anna.club</a> · <a href="tel:+14159106183">+1 (415) 910-61-83</a></p>
   </div>
 </section>
 
@@ -277,7 +317,7 @@
           <li>проживание</li>
           <li>питание</li>
           <li>тренировки и спортивные мероприятия</li>
-          <li>развлечения и игры</li>
+          <li>вечерние развлечения и игры</li>
           <li>шампанское</li>
           <li>майка в подарок</li>
           <li>фотографии от Анны</li>
@@ -300,10 +340,18 @@
   <div class="wrap">
     <h2 class="sec-t">как добраться</h2>
     <div class="logi">
-      <div class="l"><b>Перелёт</b><p>Каждый сам покупает билеты до Тампы (TPA). Из аэропорта — такси до Clearwater Beach, ~40 минут. Флоридцы приезжают на своих машинах. Я всех встречу.</p></div>
+      <div class="l"><b>Перелёт</b><p>Каждый сам покупает билеты до Тампы (TPA). Из аэропорта — такси по адресу 445 Hamden Dr, Clearwater Beach, FL 33767. Флоридцы приезжают на своих машинах. Я всех там встречу.</p></div>
       <div class="l"><b>Заезд</b><p>Среда, 28 октября, 16:00. Прилетаете раньше или позже — сообщите мне, договорюсь с хозяйкой.</p></div>
       <div class="l"><b>Выезд</b><p>Воскресенье, 1 ноября, 14:00 — и все вместе едем в музей Дали на моих машинах.</p></div>
     </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 class="sec-t">отзывы</h2>
+    <p class="sec-sub">Что говорят участницы прошлого фитнес-тура — видео в Facebook.</p>
+    <a class="btn btn-ghost" href="https://www.facebook.com/share/r/1DwEmFB8u6/" target="_blank" rel="noopener">Смотреть отзывы →</a>
   </div>
 </section>
 
@@ -311,12 +359,12 @@
   <div class="wrap">
     <div class="eyebrow">Booking</div>
     <h2 class="sc-h">забронируй место</h2>
-    <p>Свободных мест уже мало. Напиши Анне — она ответит на вопросы, забронирует место и расскажет детали.</p>
+    <p>Осталось одно место. Напиши или позвони Анне — она ответит на вопросы, забронирует место и расскажет детали.</p>
     <form class="signup" id="signup" novalidate>
       <input type="email" id="signup-email" placeholder="твой email" autocomplete="email" aria-label="Email" required>
       <button type="submit">Хочу на тур!</button>
     </form>
-    <p class="sc-note" id="signup-note">Или напиши напрямую: <a href="mailto:anna@anna.club">anna@anna.club</a> · анонсы — в <a href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">группе «Физкультурники»</a>.</p>
+    <p class="sc-note" id="signup-note">Или напрямую: <a href="mailto:anna@anna.club">anna@anna.club</a> · <a href="tel:+14159106183">+1 (415) 910-61-83</a> · анонсы — в <a href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">группе «Физкультурники»</a>.</p>
   </div>
 </section>
 
