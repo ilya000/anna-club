@@ -125,6 +125,20 @@
   .room .st.free{background:var(--green);color:var(--yellow)}
   .room .st.taken{background:rgba(20,20,20,.08);color:rgba(20,20,20,.55)}
   .room.taken{opacity:.62}
+  /* apartment video */
+  .vidcard{display:block;width:220px;max-width:100%;margin:0 0 22px;padding:0;border:2px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--ink);cursor:pointer;position:relative;font:inherit;text-align:left}
+  .vidcard img{width:100%;display:block;aspect-ratio:9/16;object-fit:cover;opacity:.9;transition:opacity .15s}
+  .vidcard:hover img{opacity:1}
+  .vidcard .play{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:var(--yellow);color:var(--ink);display:grid;place-items:center;font-size:1.05rem;padding-left:4px}
+  .vidcard .lbl{display:block;padding:10px 13px;color:var(--yellow);font-weight:700;font-size:.82rem}
+  .vidmodal{border:none;background:transparent;padding:0;overflow:visible}
+  .vidmodal[open]{position:fixed;inset:0;width:100vw;height:100vh;max-width:100vw;max-height:100vh;display:flex;align-items:center;justify-content:center}
+  .vidmodal::backdrop{background:rgba(0,0,0,.88)}
+  .vm-inner{position:relative;line-height:0}
+  .vidmodal video{display:block;max-height:84vh;max-width:min(94vw,520px);border:2px solid var(--yellow);border-radius:10px;background:#000}
+  .vm-close{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:var(--yellow);color:var(--ink);font-weight:800;font-size:1rem;line-height:1;cursor:pointer}
+  .vm-close:hover{transform:scale(1.06)}
+
   .rooms-note{margin-top:16px;font-size:.9rem;color:var(--muted)}
   .rooms-note a{font-weight:700;color:var(--ink)}
 
@@ -297,7 +311,18 @@
 <section id="stay">
   <div class="wrap">
     <h2 class="sec-t">проживание и цены</h2>
-    <p class="stay-note">Живём все вместе в квартире на Clearwater Beach — 445 Hamden Dr, в нескольких минутах пешком от океана. Всего пять спальных мест, четыре уже заняты. <a href="https://www.dropbox.com/scl/fi/219oiilytzojfjjds1vnv/f8a6892c-a077-4834-9ee2-eb8eefcb6a3d.MOV?rlkey=mpqem0kdn18pn78al6wsir0ck&amp;dl=0" target="_blank" rel="noopener">Посмотреть квартиру (видео) →</a></p>
+    <p class="stay-note">Живём все вместе в квартире на Clearwater Beach — 445 Hamden Dr, в нескольких минутах пешком от океана. Всего пять спальных мест, четыре уже заняты.</p>
+    <button class="vidcard" id="flat-open" type="button">
+      <img src="assets/clearwater/apartment-poster.jpg" alt="Гостиная квартиры в Clearwater Beach" loading="lazy">
+      <span class="play" aria-hidden="true">▶</span>
+      <span class="lbl">Видео квартиры · 1:57</span>
+    </button>
+    <dialog class="vidmodal" id="flat-modal" aria-label="Видео квартиры в Клирвотере">
+      <div class="vm-inner">
+        <video id="flat-video" src="assets/clearwater/apartment.mp4" poster="assets/clearwater/apartment-poster.jpg" controls playsinline preload="none"></video>
+        <button class="vm-close" type="button" aria-label="Закрыть видео">✕</button>
+      </div>
+    </dialog>
     <div class="rooms">
       <div class="room taken"><span class="nm">Диван в зале</span><span class="pr">$1350</span><span class="st taken">Занято</span></div>
       <div class="room taken"><span class="nm">Кинг-кровать, вдвоём <small style="color:var(--muted);font-weight:600">(два места)</small></span><span class="pr">$1350 <small style="font-family:Montserrat;font-size:.8rem;font-weight:600">с человека</small></span><span class="st taken">Занято</span></div>
@@ -383,6 +408,22 @@
 </footer>
 
 <script>
+  // apartment walkthrough — opens in a modal window
+  const fo=document.getElementById('flat-open'), fm=document.getElementById('flat-modal'), fv=document.getElementById('flat-video');
+  if(fo&&fm&&fv){
+    // some engines never dispatch dialog's `close` event, so stop the video explicitly on every path
+    const shut=()=>{fv.pause(); fv.currentTime=0; if(fm.open)fm.close();};
+    fo.addEventListener('click',()=>{
+      if(typeof fm.showModal!=='function'){window.open(fv.getAttribute('src'),'_blank','noopener');return;}
+      fm.showModal(); fv.play().catch(()=>{});
+    });
+    fm.querySelector('.vm-close').addEventListener('click',shut);
+    fm.addEventListener('click',e=>{if(e.target===fm)shut();});        // click on the backdrop
+    fm.addEventListener('cancel',e=>{e.preventDefault();shut();});     // Esc
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fm.open)shut();});
+    fm.addEventListener('close',()=>{fv.pause();});
+  }
+
   // email signup (no backend — opens a pre-filled email to Anna)
   const suForm=document.getElementById('signup'), suEmail=document.getElementById('signup-email'), suNote=document.getElementById('signup-note');
   suForm.addEventListener('submit',e=>{
