@@ -152,7 +152,9 @@
   .event .thumb{aspect-ratio:16/10;position:relative;background:var(--yellow);display:flex;align-items:center;justify-content:center;overflow:hidden}
   .event .thumb img{width:100%;height:100%;object-fit:cover}
   .event .body{padding:22px 22px 24px}
-  .event .when{display:inline-block;background:var(--green);color:var(--yellow);font-weight:700;font-size:.74rem;letter-spacing:0;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+  .event .meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px}
+  .event .when{display:inline-block;background:var(--green);color:var(--yellow);font-weight:700;font-size:.74rem;letter-spacing:0;padding:5px 12px;border-radius:999px}
+  .event .status{display:inline-block;border:2px solid var(--ink);font-weight:700;font-size:.71rem;padding:3px 11px;border-radius:999px;opacity:.7}
   .event h3{font-size:1.25rem;font-weight:700;margin-bottom:8px}
   .event p{color:var(--muted);font-size:.97rem;margin-bottom:16px}
   .empty-note{position:relative;border:2px dashed var(--ink);border-radius:8px;padding:42px 34px;text-align:center;color:var(--muted);background:linear-gradient(90deg,rgba(74,156,45,.10),transparent 44%)}
@@ -429,13 +431,17 @@
   /* =====================================================================
      КОНТЕНТ САЙТА. Чтобы добавить событие — допиши объект в массив.
      Поля: when (RU подпись даты), title (RU), text (RU), cover (необязательно),
-     link (необязательно — страница тура; если нет, кнопка ведёт в группу).
+     link (необязательно — страница тура или внешний адрес; если нет, кнопка
+     ведёт в группу), cta (необязательно — своя надпись на кнопке),
+     status (необязательно — серая плашка рядом с датой, напр. «мест нет»),
+     until (необязательно — ГГГГ-ММ-ДД; после этой даты анонс сам исчезнет).
      Фото клади в assets/ и укажи имя файла в photos: ['assets/file.jpg'].
      Если photos пуст — покажется фирменный плейсхолдер (точечный шар).
      ===================================================================== */
 
   // Ближайшие события (анонсы). Пусто => показываем приглашение в группу.
   const UPCOMING = [
+    { when:'18 сент 2026 · 17:00', status:'мест нет', title:'Пятница Красоты · Сарасота', text:'Домашний вечер красоты у Анны — повторяем, потому что первый раз зашёл на ура. В гостях <a href="https://www.facebook.com/ollie.wertheim" target="_blank" rel="noopener">Ollie Wertheim</a>, создательница натуральной линии Sensitive Skin и золотой лауреат Organic Beauty Winner 2026: даст попробовать эликсир, расскажет, на что смотреть в составе, научит массажу лица перед сном. И Irina Romanova, лицензированный косметолог — каждой по 15 минут массажа лица. Плюс станции красоты по кругу, шампанское и сюрприз. Все 12 мест разобрали, Анна ведёт лист ожидания.', cover:'assets/beauty-friday.jpg', link:'https://www.facebook.com/events/4374939719501758/', cta:'Встать в лист ожидания →', until:'2026-09-19' },
     { when:'28 окт – 1 нояб 2026', title:'Фитнес-тур · Клирвотер, Флорида', text:'Следующая выездная поездка Anna Club — Clearwater Beach, FL. Две тренировки в день, низкоуглеводное меню, чайная церемония, вечер красоты, арт-проект и Halloween, а на десерт — музей Дали. Осталось одно место: программа, цены и запись — на странице тура.', cover:'assets/clearwater.jpg', link:'clearwater-oct-2026.html' },
     { when:'27–30 мая 2027', title:'Фитнес-тур · Тахо, Калифорния', text:'Снова на озеро Тахо: тренировки среди вековых елей, аквааэробика, фирменные салаты и рисование маслом. Детали и запись — в группе «Физкультурники».', cover:'assets/tahoe/t05_t.jpg' },
   ];
@@ -458,7 +464,10 @@
 
   function renderEvents(){
     const el=document.getElementById('events-list');
-    if(!UPCOMING.length){
+    // анонс с полем until исчезает сам, когда дата прошла
+    const today=new Date().toISOString().slice(0,10);
+    const live=UPCOMING.filter(e=>!e.until||e.until>=today);
+    if(!live.length){
       el.innerHTML=`<div class="empty-note" style="grid-column:1/-1">
         <b>Ближайший тур ещё готовится.</b><br>
         Анонсы появляются в группе «Физкультурники» — вступай, чтобы не пропустить.
@@ -466,15 +475,16 @@
       </div>`;
       return;
     }
-    el.innerHTML=UPCOMING.map(e=>{
+    el.innerHTML=live.map(e=>{
       const thumb=e.cover?`<img src="${e.cover}" alt="">`:BALL;
+      const ext=/^https?:/.test(e.link||'') ? ' target="_blank" rel="noopener"' : '';
       const cta=e.link
-        ? `<a class="btn btn-ghost" href="${e.link}">Программа и запись →</a>`
+        ? `<a class="btn btn-ghost" href="${e.link}"${ext}>${e.cta||'Программа и запись →'}</a>`
         : `<a class="btn btn-ghost" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Смотреть детали в группе</a>`;
       return `<article class="event">
-        ${e.link?`<a class="thumb" href="${e.link}">${thumb}</a>`:`<div class="thumb">${thumb}</div>`}
+        ${e.link?`<a class="thumb" href="${e.link}"${ext}>${thumb}</a>`:`<div class="thumb">${thumb}</div>`}
         <div class="body">
-          <span class="when">${e.when}</span>
+          <div class="meta"><span class="when">${e.when}</span>${e.status?`<span class="status">${e.status}</span>`:''}</div>
           <h3>${e.title}</h3>
           <p>${e.text}</p>
           ${cta}
