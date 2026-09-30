@@ -159,6 +159,18 @@
   .empty-note::before{content:"";position:absolute;left:24px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:22px 0 0 var(--yellow),44px 0 0 var(--ink)}
   .empty-note b{color:var(--ink)}
 
+  /* reviews */
+  .reviews{background:var(--paper)}
+  #reviews-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;align-items:start}
+  .review{position:relative;border:2px solid var(--ink);border-radius:8px;background:var(--white);padding:26px 24px 22px}
+  .review::before{content:"\201C";position:absolute;right:16px;top:4px;font-family:'Anton',sans-serif;font-size:3.4rem;line-height:1;color:rgba(20,20,20,.1)}
+  .review .txt{position:relative;color:var(--ink);font-size:.99rem;line-height:1.62;margin-bottom:18px;white-space:pre-line}
+  .review .who{display:flex;align-items:center;gap:12px}
+  .review .av{width:46px;height:46px;border-radius:50%;flex:0 0 auto;object-fit:cover;border:2px solid var(--ink);background:var(--yellow);display:grid;place-items:center;font-family:'Anton',sans-serif;font-size:1.15rem;color:var(--ink)}
+  .review .nm{font-weight:700;font-size:.95rem;color:var(--ink);text-decoration:none}
+  .review a.nm:hover{text-decoration:underline}
+  .review .sub{display:block;font-weight:500;font-size:.79rem;color:var(--muted)}
+
   /* timeline */
   .trips{background:var(--ink);color:var(--white)}
   .trips .sec-head .eyebrow{color:rgba(255,255,255,.6)}
@@ -238,6 +250,7 @@
       <a href="#what">What we do</a>
       <a href="#schedule">Schedule</a>
       <a href="#trips">Trips</a>
+      <a href="#reviews">Reviews</a>
       <a href="#join">Join</a>
     </span>
     <button class="burger" id="burger" aria-label="Меню" aria-controls="navLinks" aria-expanded="false">☰</button>
@@ -305,7 +318,7 @@
       <div class="pull">strong enough to sweat. funny enough to come back.</div>
       <div class="micro-stats">
         <span>с 2014 года</span>
-        <span>552 участника</span>
+        <span>571 участник</span>
         <span>31 отзыв</span>
       </div>
     </div>
@@ -400,12 +413,24 @@
   </div>
 </section>
 
+<!-- ============ REVIEWS ============ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Reviews</div>
+      <h2>what they say</h2>
+      <p>100% рекомендуют — 31 отзыв на странице Anna Club и не только. Вот несколько.</p>
+    </div>
+    <div id="reviews-list"></div>
+  </div>
+</section>
+
 <!-- ============ JOIN ============ -->
 <section class="join" id="join">
   <div class="wrap">
     <h2 class="display">let’s move together</h2>
     <p>Вступай в «Физкультурники»: там анонсы туров, записи, поддержка и жизнь клуба. По личным вопросам — напиши Анне напрямую.</p>
-    <div class="members">552 участника · 100% рекомендуют · 31 отзыв</div>
+    <div class="members">571 участник · 100% рекомендуют · 31 отзыв</div>
     <div class="links">
       <a class="btn btn-solid" href="https://www.facebook.com/groups/fizkulturniki" target="_blank" rel="noopener">Группа «Физкультурники»</a>
       <a class="btn btn-ghost" href="https://www.facebook.com/AnnaClubLLC" target="_blank" rel="noopener">Страница Anna Club</a>
@@ -457,6 +482,33 @@
       const dx=x-50,dy=y-50; return (dx*dx+dy*dy<2100)?`<circle cx="${x}" cy="${y}" r="${r}"/>`:'';}).join('')}
   </g></svg>`;
 
+  // Отзывы. Поля: name, text (обязательные), sub (подпись под именем),
+  // avatar (файл в assets/reviews/), link (профиль). Без avatar рисуется
+  // жёлтый кружок с первой буквой имени. Переносы строк в text сохраняются.
+  const REVIEWS = [
+    { name:'Alysa Toscana', link:'https://www.facebook.com/alysa.toscana/', avatar:'assets/reviews/alysa-toscana.jpg', sub:'тренируется с Анной', text:'У меня после Аниных тренировок никогда не было такой боли, чтобы нельзя было тренироваться на следующий день. Более того, она так хорошо учит правильной технике упражнений, что и травму не получишь как у других тренеров в спортзалах на занятиях, где им все равно под каким углом ты приседаешь, сколько градусов в коленях, как правильно качать бицепсы и трицепсы с гантелями в руках, как работать со штангой и так далее. Эти знания я усвоила навсегда. Спасибо, шеф!' },
+    { name:'Natasha Sinyaver', sub:'после фитнес-тура во Флориде', text:'Я минус 2.5 кг сегодня утром. Девки, классный был тур, как обычно. Компания собралась отличная, мы здорово провели время, перезнакомились все! Анька, тебе особое спасибо за организацию и поддержку. Ты — абсолютно Профессионал своего дела! Кто хочет похудеть, просто реально должен слушать что ты говоришь. Спасибо большое!!!' },
+    { name:'Anna Gu', sub:'рекомендация на странице Anna Club', text:'I have such a great life changing experience! Lost 34 pounds within 4 months. Feel so energetic and strong. Wanted to mention that all my life I hated jogging, but thanks to incredible coach Anna, now I’m jogging every day and it’s my new meditation. In love with my new body and mindfulness.' },
+    { name:'Marina Bass', sub:'группа «Физкультурники»', text:'Очень задел за живое вчерашний пост Анны о 100 кранчей с утра! И вот — пожалуйста — делюсь зарядом бодрости и энергии :-)))) Понимаю и про форму, и про всё, но самое главное — я растянулась на полу и сделала это! Спасибо Ане за мотивацию!!' },
+    { name:'Inna Zubrilova', sub:'из поздравления Анне', text:'Анна — тренер. Лучший в мире!\nПодключайся! Три-четыре!\nБудешь стройным, бодрым, ловким!\nС физкультурной подготовкой!' },
+  ];
+
+  function renderReviews(){
+    const el=document.getElementById('reviews-list');
+    if(!el) return;
+    el.innerHTML=REVIEWS.map(r=>{
+      const av=r.avatar
+        ? `<img class="av" src="${r.avatar}" alt="" loading="lazy">`
+        : `<span class="av" aria-hidden="true">${r.name.trim().charAt(0)}</span>`;
+      const nm=r.link
+        ? `<a class="nm" href="${r.link}" target="_blank" rel="noopener">${r.name}</a>`
+        : `<span class="nm">${r.name}</span>`;
+      return `<article class="review">
+        <div class="txt">${r.text}</div>
+        <div class="who">${av}<div>${nm}${r.sub?`<span class="sub">${r.sub}</span>`:''}</div></div>
+      </article>`;}).join('');
+  }
+
   function renderEvents(){
     const el=document.getElementById('events-list');
     if(!UPCOMING.length){
@@ -504,6 +556,7 @@
 
   renderEvents();
   renderTimeline();
+  renderReviews();
 
   // sticky nav bg
   const bar=document.getElementById('bar');
