@@ -419,7 +419,7 @@
     <div class="sec-head">
       <div class="eyebrow">Reviews</div>
       <h2>what they say</h2>
-      <p>100% рекомендуют — 31 отзыв на странице Anna Club и не только. Вот несколько.</p>
+      <p>100% рекомендуют — <a class="lk" href="https://www.facebook.com/AnnaClubLLC/reviews" target="_blank" rel="noopener">31 отзыв на странице Anna Club</a> и не только. Вот несколько.</p>
     </div>
     <div id="reviews-list"></div>
   </div>
@@ -487,10 +487,10 @@
   // жёлтый кружок с первой буквой имени. Переносы строк в text сохраняются.
   const REVIEWS = [
     { name:'Alysa Toscana', link:'https://www.facebook.com/alysa.toscana/', avatar:'assets/reviews/alysa-toscana.jpg', sub:'тренируется с Анной', text:'У меня после Аниных тренировок никогда не было такой боли, чтобы нельзя было тренироваться на следующий день. Более того, она так хорошо учит правильной технике упражнений, что и травму не получишь как у других тренеров в спортзалах на занятиях, где им все равно под каким углом ты приседаешь, сколько градусов в коленях, как правильно качать бицепсы и трицепсы с гантелями в руках, как работать со штангой и так далее. Эти знания я усвоила навсегда. Спасибо, шеф!' },
-    { name:'Natasha Sinyaver', sub:'после фитнес-тура во Флориде', text:'Я минус 2.5 кг сегодня утром. Девки, классный был тур, как обычно. Компания собралась отличная, мы здорово провели время, перезнакомились все! Анька, тебе особое спасибо за организацию и поддержку. Ты — абсолютно Профессионал своего дела! Кто хочет похудеть, просто реально должен слушать что ты говоришь. Спасибо большое!!!' },
-    { name:'Anna Gu', sub:'рекомендация на странице Anna Club', text:'I have such a great life changing experience! Lost 34 pounds within 4 months. Feel so energetic and strong. Wanted to mention that all my life I hated jogging, but thanks to incredible coach Anna, now I’m jogging every day and it’s my new meditation. In love with my new body and mindfulness.' },
-    { name:'Marina Bass', sub:'группа «Физкультурники»', text:'Очень задел за живое вчерашний пост Анны о 100 кранчей с утра! И вот — пожалуйста — делюсь зарядом бодрости и энергии :-)))) Понимаю и про форму, и про всё, но самое главное — я растянулась на полу и сделала это! Спасибо Ане за мотивацию!!' },
-    { name:'Inna Zubrilova', sub:'из поздравления Анне', text:'Анна — тренер. Лучший в мире!\nПодключайся! Три-четыре!\nБудешь стройным, бодрым, ловким!\nС физкультурной подготовкой!' },
+    { name:'Natasha Sinyaver', link:'https://www.facebook.com/natasha.sinyaver', avatar:'assets/reviews/natasha-sinyaver.jpg', sub:'после фитнес-тура во Флориде', text:'Я минус 2.5 кг сегодня утром. Девки, классный был тур, как обычно. Компания собралась отличная, мы здорово провели время, перезнакомились все! Анька, тебе особое спасибо за организацию и поддержку. Ты — абсолютно Профессионал своего дела! Кто хочет похудеть, просто реально должен слушать что ты говоришь. Спасибо большое!!!' },
+    { name:'Anna Gu', link:'https://www.facebook.com/ana.tiulk', avatar:'assets/reviews/anna-gu.jpg', sub:'рекомендация на странице Anna Club', text:'I have such a great life changing experience! Lost 34 pounds within 4 months. Feel so energetic and strong. Wanted to mention that all my life I hated jogging, but thanks to incredible coach Anna, now I’m jogging every day and it’s my new meditation. In love with my new body and mindfulness.' },
+    { name:'Marina Bass', link:'https://www.facebook.com/marinabassphoto', avatar:'assets/reviews/marina-bass.jpg', sub:'группа «Физкультурники»', text:'Очень задел за живое вчерашний пост Анны о 100 кранчей с утра! И вот — пожалуйста — делюсь зарядом бодрости и энергии :-)))) Понимаю и про форму, и про всё, но самое главное — я растянулась на полу и сделала это! Спасибо Ане за мотивацию!!' },
+    { name:'Inna Zubrilova', link:'https://www.facebook.com/inna.zubrilova.2025', avatar:'assets/reviews/inna-zubrilova.jpg', sub:'из поздравления Анне', text:'Анна — тренер. Лучший в мире!\nПодключайся! Три-четыре!\nБудешь стройным, бодрым, ловким!\nС физкультурной подготовкой!' },
   ];
 
   function renderReviews(){
