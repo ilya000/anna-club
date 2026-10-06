@@ -165,6 +165,7 @@
   .review{position:relative;break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-block;width:100%;margin:0 0 22px;border:2px solid var(--ink);border-radius:8px;background:var(--white);padding:26px 24px 22px}
   .review::before{content:"\201C";position:absolute;right:16px;top:4px;font-family:'Anton',sans-serif;font-size:3.4rem;line-height:1;color:rgba(20,20,20,.1)}
   .review .txt{position:relative;color:var(--ink);font-size:.99rem;line-height:1.62;margin-bottom:18px;white-space:pre-line}
+  .review video{width:100%;display:block;aspect-ratio:9/16;background:#000;border:2px solid var(--ink);border-radius:6px;margin-bottom:16px}
   .review .who{display:flex;align-items:center;gap:12px}
   .review .av{width:46px;height:46px;border-radius:50%;flex:0 0 auto;object-fit:cover;border:2px solid var(--ink);background:var(--yellow);display:grid;place-items:center;font-family:'Anton',sans-serif;font-size:1.15rem;color:var(--ink)}
   .review .nm{font-weight:700;font-size:.95rem;color:var(--ink);text-decoration:none}
@@ -482,10 +483,13 @@
       const dx=x-50,dy=y-50; return (dx*dx+dy*dy<2100)?`<circle cx="${x}" cy="${y}" r="${r}"/>`:'';}).join('')}
   </g></svg>`;
 
-  // Отзывы. Поля: name, text (обязательные), sub (подпись под именем),
-  // avatar (файл в assets/reviews/), link (профиль). Без avatar рисуется
-  // жёлтый кружок с первой буквой имени. Переносы строк в text сохраняются.
+  // Отзывы. Поля: name (обязательное), text, sub (подпись под именем),
+  // avatar (файл в assets/reviews/), link (профиль), video + poster
+  // (видеоотзыв: файл в assets/reviews/, играет прямо в карточке).
+  // Без avatar рисуется жёлтый кружок с первой буквой имени.
+  // Переносы строк в text сохраняются.
   const REVIEWS = [
+    { name:'Ollie Wertheim', link:'https://www.facebook.com/ollie.wertheim', sub:'видеоотзыв · октябрь 2026', video:'assets/reviews/video-review-1.mp4', poster:'assets/reviews/video-review-1.jpg', text:'Я недавно вступила в Anna Club и занимаюсь теперь по зуму, два раза в неделю. За три месяца постоянных тренировок вижу колоссальные изменения: в осанке — это самое главное для меня, — в здоровье шеи и спины. Уровень энергии поднялся сильно, я успеваю за день гораздо больше, улучшился сон. Не нужно ездить в зал: зум — прекрасная альтернатива. Я всю жизнь живу с йогой и пилатесом, но то, что дают силовые тренировки у Ани, ни с чем не сравнить.' },
     { name:'Alysa Toscana', link:'https://www.facebook.com/alysa.toscana/', avatar:'assets/reviews/alysa-toscana.jpg', sub:'группа «Физкультурники» · сентябрь 2026', text:'У меня после Аниных тренировок никогда не было такой боли, чтобы нельзя было тренироваться на следующий день. Более того, она так хорошо учит правильной технике упражнений, что и травму не получишь как у других тренеров в спортзалах на занятиях, где им все равно под каким углом ты приседаешь, сколько градусов в коленях, как правильно качать бицепсы и трицепсы с гантелями в руках, как работать со штангой и так далее. Эти знания я усвоила навсегда. Спасибо, шеф!' },
     { name:'Tatiana Kassianik', link:'https://www.facebook.com/roman.kassianik', avatar:'assets/reviews/tatiana-kassianik.jpg', sub:'Facebook · сентябрь 2018', text:'I’ve been training with Anya for about a year and have seen amazing results. I lost almost 30 pounds. Never in my adult life had I felt stronger, healthier, and confident facing the mirror than today. Like many moms raising three children, homeschooling, cooking, cleaning, and driving, I barely had time to care of myself for many years. I consider turning my weak, poor body into a RUNNER and GYM lover one of my great accomplishments. That is all because of Anya’s effort!\nAnya is a truly excellent coach. She possesses an excellent combination of being tough and a very warm person at the same time. She knows when to encourage and when to push. She uses a holistic approach to training and takes into consideration your mental, emotional, and physical needs as well as provides dietary recommendations.\nAnya is my role model. Thank you, Anya! You are the best!' },
     { name:'Tatyana Tanechka', link:'https://www.facebook.com/tatyana.tanechka', sub:'Facebook · март 2019', text:'Анна помогла мне выйти на новый уровень силы и выносливости. К моему большому удивлению я теперь могу пробежать 5К! Искренняя забота, индивидуальное внимание, юмор и задор Анны надолго оставляют улыбку на моем лице после занятий. Спасибо, Анна!' },
@@ -511,8 +515,9 @@
       const nm=r.link
         ? `<a class="nm" href="${r.link}" target="_blank" rel="noopener">${r.name}</a>`
         : `<span class="nm">${r.name}</span>`;
+      const vid=r.video?`<video src="${r.video}"${r.poster?` poster="${r.poster}"`:''} controls playsinline preload="none"></video>`:'';
       return `<article class="review">
-        <div class="txt">${r.text}</div>
+        ${vid}${r.text?`<div class="txt">${r.text}</div>`:''}
         <div class="who">${av}<div>${nm}${r.sub?`<span class="sub">${r.sub}</span>`:''}</div></div>
       </article>`;}).join('');
   }
